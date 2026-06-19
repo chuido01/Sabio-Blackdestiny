@@ -1,6 +1,8 @@
-<img width="1086" height="587" alt="image" src="https://github.com/user-attachments/assets/4d71e6a0-453a-4136-88f4-d6928ec897ab" />
-
 # SABIO Blackdestiny
+
+<p align="center">
+  <img src="docs/media/sabio-infografia.png" alt="SABIO — La memoria a largo plazo para trabajar con IA" width="860">
+</p>
 
 > **La memoria a largo plazo para trabajar con IA — sin base de datos vectorial, sin RAG.**
 > Un sistema de archivos de texto, bóvedas-wiki e índices que tu asistente (Claude Code) lee
@@ -48,20 +50,16 @@ El conocimiento se federa en **4 Salas** (cada dato vive en UNA sola; las demás
 
 Y en **2 planos**, unidos por una sola flecha **hacia arriba y de solo lectura**:
 
-graph TB
-
-    subgraph GLOBAL["🏛  Centro de Mando Sabio — plano global (solo lectura)"]
-        SPINE["★ índice de índices<br/>qué ID vive en qué Sala"]
-        GC["Sala C · Referencia 🌐"]
-        GD["Sala D · Aprendizaje 🌐 (lo promovido)"]
-    end
-    subgraph LOCAL["📦  Proyecto — plano local (aislado)"]
-        LA["Sala A · Investigación"]
-        LB["Sala B · Catálogo"]
-        LD["Sala D · captura local"]
-    end
-    LOCAL -.->|lee normas/investigación compartida ↑ (MCP sabio-shared)| GLOBAL
-    LD -.->|/aprender → /promover sube lo genérico ↑| GD
+```text
+PLANO GLOBAL · Centro de Mando Sabio   (solo lectura)
+  ★ índice de índices · Sala C (Referencia) · Sala D (Aprendizaje)
+                 ▲
+                 │  el proyecto LEE el plano global (solo lectura, vía sabio-shared)
+                 │
+PLANO LOCAL · Proyecto   (aislado)
+  Sala A (Investigación) · Sala B (Catálogo) · Sala D (captura local)
+  /aprender → /promover  sube lo genérico ↑ al plano global
+```
 
 > Un proyecto **jamás** lee la carpeta de otro proyecto. Solo puede *consultar* el plano global
 > (vía el MCP `sabio-shared`, de solo lectura). Eso es el **aislamiento**.
