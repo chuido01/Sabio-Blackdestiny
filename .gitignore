@@ -1,0 +1,25 @@
+# Entornos de Python (el MCP crea su .venv al instalar)
+.venv/
+env/
+__pycache__/
+*.py[cod]
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Node (si algún componente lo usa)
+node_modules/
+
+# Generados por el perfil agéntico de la Sala D
+_index.json
+
+# Config local de Claude Code (nunca se versiona)
+.claude/
+settings.local.json
+.credentials.json

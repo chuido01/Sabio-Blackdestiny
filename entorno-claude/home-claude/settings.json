@@ -1,0 +1,72 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "MultiEdit",
+      "NotebookEdit",
+      "Bash",
+      "WebFetch",
+      "WebSearch",
+      "Glob",
+      "Grep",
+      "Task",
+      "TodoWrite",
+      "ExitPlanMode",
+      "Skill",
+      "BashOutput",
+      "KillShell"
+    ],
+    "deny": [],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(git reset:*)",
+      "Bash(git rebase:*)",
+      "Bash(git merge:*)",
+      "Bash(git checkout:*)",
+      "Bash(git switch:*)",
+      "Bash(git clean:*)",
+      "Bash(git stash drop:*)",
+      "Bash(git stash pop:*)",
+      "Bash(docker *)",
+      "Bash(gh:*)",
+      "Bash(npm publish:*)",
+      "Bash(npm version:*)",
+      "Bash(rm:*)",
+      "Bash(rm -r:*)",
+      "Bash(rm -rf:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"<TU_CARPETA_HOME>\\.claude\\scripts\\hook-session-start.ps1\"",
+            "timeout": 10,
+            "statusMessage": "Reinyectando reglas de aislamiento (SABIO)..."
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"<TU_CARPETA_HOME>\\.claude\\scripts\\hook-pre-compact.ps1\"",
+            "timeout": 10,
+            "statusMessage": "Checkpoint de estado pre-compactacion..."
+          }
+        ]
+      }
+    ]
+  },
+  "env": {},
+  "outputStyle": "default",
+  "theme": "auto",
+  "thinkingMode": "enabled"
+}
