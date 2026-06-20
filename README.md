@@ -78,6 +78,7 @@ Todo lo que es SABIO hoy, en versión genérica y reutilizable:
 | 🤖 **Autoaprendizaje** | El perfil agéntico de la Sala D: captura + validador de aprendizajes. |
 | ⌨️ **Skills / comandos** | `/aprender`, `/promover`, `/memory-lint`, `/disenar`. |
 | 🧠 **Agentes** | Curador de SABIO, curador de investigación, revisor de código, escritor de commits, de documentación y de seguridad. |
+| 📊 **Dashboard de flota** | Panel **offline** (Python + HTML) que muestra la salud de tus proyectos (git, SABIO, backups, seguridad) y qué atender primero ([`dashboard/`](dashboard/)). |
 | 📚 **Guías** | Documentación visual "en cristiano" de cada componente ([`docs/`](docs/)). |
 
 ---

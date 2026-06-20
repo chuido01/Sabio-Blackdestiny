@@ -23,3 +23,10 @@ _index.json
 .claude/
 settings.local.json
 .credentials.json
+
+# Dashboard de flota: salidas GENERADAS por el escaneo (las FUENTES sí se versionan).
+# La config con tus rutas reales es local a tu máquina.
+dashboard/estado-flota.json
+dashboard/historial-flota.jsonl
+dashboard/panel/datos/
+dashboard/flota.config.json

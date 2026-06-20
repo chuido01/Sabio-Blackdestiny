@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centro de Control · Flota Blackdestiny</title>
+<link rel="stylesheet" href="estilos/tokens.css">
+<link rel="stylesheet" href="estilos/panel.css">
+</head>
+<body>
+<div class="app">
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" aria-label="Navegación del panel">
+    <div class="brand" title="Centro de Control Blackdestiny" aria-hidden="true">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6z"/><path d="M12 11v4"/><path d="M9.5 12.5 12 15l2.5-2.5"/></svg>
+    </div>
+    <button class="nav-btn active" data-view="control" aria-label="Vista control (árbol)" aria-pressed="true"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="12" r="3"/><path d="M9 6h4a2 2 0 0 1 2 2v1"/><path d="M9 18h4a2 2 0 0 0 2-2v-1"/></svg><span class="tip">Control · árbol</span></button>
+    <button class="nav-btn" data-view="grid" aria-label="Vista cuadrícula" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span class="tip">Cuadrícula</span></button>
+    <div class="nav-sp"></div>
+    <button class="nav-btn" id="reBtn" title="Cómo refrescar" aria-label="Cómo refrescar los datos"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg><span class="tip">Refrescar</span></button>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <main class="main">
+    <header class="top">
+      <div>
+        <div class="eyebrow">Plano de control · Blackdestiny</div>
+        <h1>Centro de Control <b>de Flota</b></h1>
+        <div class="sub">Estado real de tu flota de proyectos · datos embebidos, 100% offline.</div>
+      </div>
+      <div class="genbox"><div id="stamp"></div></div>
+    </header>
+
+    <div class="kpis" id="kpis"></div>
+
+    <!-- cola de acciones priorizada de la flota (Top 5) -->
+    <section class="cola" id="cola"></section>
+
+    <!-- novedades desde el último escaneo (#19) -->
+    <section class="nov" id="novedades"></section>
+
+    <!-- vista control -->
+    <section id="view-control">
+      <div class="panel-head">
+        <div class="panel-title">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="12" r="3"/><path d="M9 6h4a2 2 0 0 1 2 2v1"/><path d="M9 18h4a2 2 0 0 0 2-2v-1"/></svg>
+          Organigrama de la flota — selecciona un nodo para ver su detalle
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--verde)"></i>en orden</span>
+          <span><i style="background:var(--ambar)"></i>atención</span>
+          <span><i style="background:var(--rojo)"></i>crítico</span>
+        </div>
+      </div>
+      <div class="tree" id="tree"></div>
+    </section>
+
+    <!-- vista grid -->
+    <section id="view-grid" class="hidden">
+      <div class="gridbar">
+        <div class="gridq-wrap">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="q" class="gridq" type="search" placeholder="Buscar proyecto…" aria-label="Buscar proyecto">
+        </div>
+        <label class="gridtoggle"><input type="checkbox" id="soloAlertas"> solo con alertas</label>
+        <div class="gridsort" role="group" aria-label="Ordenar por">
+          <span class="gridsort-l">orden</span>
+          <button class="gsort active" data-sort="riesgo">riesgo</button>
+          <button class="gsort" data-sort="nombre">nombre</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <footer>
+      Generado por <b>escanear-flota.py</b> (o <b>Escanear-Flota.ps1</b> en Windows) · sin servidor.
+      Re-ejecuta el escáner (o doble-clic en <b>Abrir-Panel.cmd</b>) para refrescar.
+    </footer>
+  </main>
+</div>
+
+<!-- ================= DRAWER ================= -->
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Detalle del proyecto" style="--s:var(--cyan)"></aside>
+
+<!-- toast de confirmación (copiar prompt) -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ================= DATOS (generados por Escanear-Flota.ps1: window.X = …) ================= -->
+<script src="datos/estado-flota.js"></script>
+<script src="datos/historial.js"></script>
+<!-- ================= APP (lógica) ================= -->
+<script src="app/semaforo.js"></script>
+<script src="app/prompts.js"></script>
+<script src="app/vistas.js"></script>
+<script src="app/detalle.js"></script>
+<script src="app/main.js"></script>
+</body>
+</html>

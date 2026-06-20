@@ -1,0 +1,5 @@
+{
+  "_ayuda": "Copia este archivo a flota.config.json y pon tus rutas reales. Asi el escaner (y el doble-clic) saben que escanear sin reescribir las rutas cada vez. flota.config.json esta gitignored (es local a tu maquina).",
+  "centro": "C:\\Ruta\\A\\Tu Centro de Mando Sabio",
+  "proyectos": "C:\\Ruta\\A\\Tus Proyectos"
+}

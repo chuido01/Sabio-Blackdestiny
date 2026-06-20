@@ -98,6 +98,15 @@ Usa el Kit ([`kit/`](kit/)) para crear un proyecto completo (Capa 1 + Capa 2):
 
 ---
 
+## Opcional — Dashboard de flota
+
+Para ver la salud de **todos** tus proyectos de un vistazo (panel offline, sin servidor):
+copia `dashboard/flota.config.example.json` a `dashboard/flota.config.json` con tus rutas y ejecuta
+`python dashboard/escanear-flota.py --abrir` (en Windows, doble-clic en `dashboard/Abrir-Panel.cmd`).
+Detalles en [`dashboard/README.md`](dashboard/README.md).
+
+---
+
 ## Comprobar que quedó bien
 
 Pídele a Claude:

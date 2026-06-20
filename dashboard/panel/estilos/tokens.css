@@ -1,0 +1,22 @@
+/* ============================================================================
+   tokens.css — Identidad visual del Centro de Control de Flota (única fuente).
+   Dark-glassmorphism. Mantener sincronizado con:
+   00-Documentacion/Mejora Diseño Visual/design-tokens-portable.md
+   ============================================================================ */
+:root{
+  /* --- Fondos / superficies (design-tokens dark) --- */
+  --background:#0b1220; --card:#111827; --sidebar:rgba(17,24,39,.65);
+  --glass:rgba(255,255,255,.03); --glass-strong:rgba(255,255,255,.06);
+  --blur:blur(10px);
+  /* --- Texto --- */
+  --ink:#f1f5f9; --muted:#94a3b8; --dim:#64748b;
+  /* --- Acentos --- */
+  --cyan:#38bdf8; --purple:#a78bfa; --teal:#2dd4bf; --pink:#f472b6;
+  /* --- Semáforo --- */
+  --verde:#34d399; --ambar:#fbbf24; --rojo:#f87171;
+  /* --- Bordes / radios --- */
+  --border:rgba(255,255,255,.08); --border-hi:rgba(255,255,255,.15);
+  --r-sm:10px; --r:12px; --r-lg:14px; --r-xl:18px;
+  --font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,'Cascadia Code','Consolas',monospace;
+}
