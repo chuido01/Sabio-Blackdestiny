@@ -30,3 +30,6 @@ dashboard/estado-flota.json
 dashboard/historial-flota.jsonl
 dashboard/panel/datos/
 dashboard/flota.config.json
+
+# Copias de seguridad locales (ZIP pesados que además contienen el propio historial git).
+03-Backups/
