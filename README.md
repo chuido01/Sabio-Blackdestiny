@@ -43,7 +43,7 @@ Es el patrón "LLM Wiki" de Andrej Karpathy.
 
 El conocimiento se federa en **4 Salas** (cada dato vive en UNA sola; las demás lo señalan por su ID):
 
-- **Sala A · Investigación** — la bóveda de notas atómicas enlazadas (`investigacion:<tema>`).
+- **Sala A · Investigación** — la bóveda de notas atómicas enlazadas (`investigacion:<tema>`). En el Centro de Mando es **multi-dominio**: un dominio nuevo se añade como una etiqueta + un mapa, **nunca** como una bóveda aparte.
 - **Sala B · Catálogo** — fichas de tus herramientas y activos (`activo:<cosa>`).
 - **Sala C · Referencia** — normas y estándares externos (`norma:<marco>:<código>`).
 - **Sala D · Aprendizaje** — lecciones para no repetir errores (`aprendizaje:<id>`).
@@ -52,7 +52,7 @@ Y en **2 planos**, unidos por una sola flecha **hacia arriba y de solo lectura**
 
 ```text
 PLANO GLOBAL · Centro de Mando Sabio   (solo lectura)
-  ★ índice de índices · Sala C (Referencia) · Sala D (Aprendizaje)
+  ★ índice de índices · Sala A (Investigación · multi-dominio) · Sala C (Referencia) · Sala D (Aprendizaje)
                  ▲
                  │  el proyecto LEE el plano global (solo lectura, vía sabio-shared)
                  │

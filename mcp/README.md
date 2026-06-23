@@ -1,7 +1,7 @@
 # MCP `sabio-shared` — el puente de solo-lectura al plano global
 
 > Un servidor MCP (stdio) que deja a un proyecto **leer** —nunca escribir— el conocimiento común de
-> tu **Centro de Mando Sabio** (Salas C y D transversales, investigación compartida, índice de
+> tu **Centro de Mando Sabio** (la Sala A de investigación transversal y multi-dominio, las Salas C y D transversales, y el índice de
 > índices). Es la **única** excepción al aislamiento entre proyectos.
 
 ## Qué expone (4 herramientas, todas read-only)
