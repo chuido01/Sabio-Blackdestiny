@@ -4,7 +4,7 @@
 > No es un proyecto entregable; **sirve a todos tus proyectos** sin ser uno de ellos.
 
 ## Qué es / qué NO es
-- **SÍ:** guarda el conocimiento común (Salas C y D transversales + investigación compartida),
+- **SÍ:** guarda el conocimiento común (la Sala A de investigación transversal multi-dominio + las Salas C y D transversales),
   reparte el Kit a proyectos nuevos y es el **único** que escribe el plano global.
 - **NO:** no es una app ni un entregable. Su "producto" es mantener sana y coordinada la plataforma.
 
@@ -16,8 +16,8 @@
 - **MCP:** `mcp/server.py` expone `04-Recursos/` en **solo-lectura** a los proyectos (`sabio-shared`).
 
 ## Dueño del plano global (escritura)
-- Este es el **único** sitio con **escritura** sobre el plano global (Salas C y D transversales,
-  investigación compartida). Desde los proyectos, el plano global es **solo-lectura** (vía el MCP
+- Este es el **único** sitio con **escritura** sobre el plano global (la Sala A transversal
+  multi-dominio + las Salas C y D transversales). Desde los proyectos, el plano global es **solo-lectura** (vía el MCP
   `sabio-shared`).
 - `/promover` **materializa aquí** los candidatos genéricos triados y traídos desde los proyectos.
 

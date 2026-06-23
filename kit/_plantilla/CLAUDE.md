@@ -29,6 +29,13 @@ los dolores operativos del día a día; aquí se construye conocimiento navegabl
 > es una bóveda que no absorbe conocimiento que pertenece a otra sala.
 > *(Salas A–D = tipos de conocimiento; Capa 1/2 = arquitectura del sistema.)*
 
+> **Bóveda multi-dominio (solo en el plano global / hub):** la bóveda del **Centro de Mando** (no la
+> de un proyecto normal) puede ser **transversal y multi-dominio**: aloja investigación de varios
+> dominios promovida desde los proyectos. Un dominio externo se marca con la clave **`dominio: <slug>`**
+> en el frontmatter **+ una nota-índice (MOC)** dentro de la **única** bóveda; **nunca** se crea una
+> bóveda nueva por tema (`sabio-shared` expone una sola — otra quedaría invisible para la flota). En la
+> bóveda **local de un proyecto** esto no aplica: es de un solo dominio y la clave `dominio:` se omite.
+
 ---
 
 ## 2. Estructura de directorios
@@ -116,6 +123,7 @@ autor: IA                   # Humano | IA | Humano+IA
 verificado: false           # true solo si hay fuente primaria citada
 creado: AAAA-MM-DD
 tags: [tag1, tag2]
+dominio: <slug>             # OPCIONAL — solo en la bóveda multi-dominio del hub/plano global; omítela en proyectos
 ---
 ```
 
