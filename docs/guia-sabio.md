@@ -34,12 +34,13 @@ barato. Es el patrón "LLM Wiki" de Andrej Karpathy.
 
 **Plano global (Centro de Mando Sabio) — compartido, solo lectura.** Lo que es igual para todos vive
 aquí una sola vez:
+- **Sala A · Investigación (transversal):** la bóveda del Centro, hoy **multi-dominio**: además de la investigación nativa, aloja conocimiento que los proyectos **promueven** para que sirva a todos. Un dominio nuevo se marca con una **etiqueta**, no con una bóveda aparte.
 - **Sala C · Referencia:** normas y estándares externos (NIST, ISO, PCI).
 - **Sala D · Aprendizaje (transversal):** las lecciones genéricas que un proyecto **promueve** para
   que sirvan a todos.
 
 **Plano local (cada proyecto) — aislado.** Lo propio de cada proyecto, dentro de su caja:
-- **Sala A · Investigación:** la bóveda de notas del proyecto.
+- **Sala A · Investigación:** la bóveda de notas del proyecto. *(Igual que la Sala D, la Sala A vive en los dos planos: local en cada proyecto, y transversal/multi-dominio en el Centro.)*
 - **Sala B · Catálogo:** las fichas de activos del proyecto.
 - **Sala D · Aprendizaje (captura):** lo que se aprende ahí mismo, al construir o al ejecutar. **La
   captura es siempre local**; solo lo transversal sube al plano global.
@@ -56,7 +57,8 @@ Cada dato es de un tipo, y por eso vive en una Sala concreta. Son como cuatro es
 etiquetas distintas.
 
 - **Sala A · Investigación** — Lo que estudias e investigas. Es la bóveda Obsidian: notas cortas (una
-  idea por nota) enlazadas entre sí. Etiqueta: `investigacion:<tema>`.
+  idea por nota) enlazadas entre sí. La del Centro es **multi-dominio**: un dominio nuevo se añade como
+  una **etiqueta** + un mapa, **nunca** como una bóveda aparte. Etiqueta: `investigacion:<tema>`.
 - **Sala B · Catálogo** — Tus herramientas y activos. Fichas de lo que tienes: qué es, para qué sirve,
   qué cuesta. Etiqueta: `activo:<cosa>`.
 - **Sala C · Referencia (global)** — Normas y estándares externos (NIST, ISO, PCI). Son iguales para
@@ -173,7 +175,7 @@ comando `/memory-lint` vigila que nada se duplique entre capas.
 - **Sala A–D = los tipos de conocimiento (las estanterías).** Investigación, Catálogo, Referencia,
   Aprendizaje. No confundir con las Capas.
 - **Plano local** = el conocimiento de un proyecto, que no sale de su caja (Salas A y B).
-- **Plano global** = el conocimiento compartido por toda la plataforma (Salas C y D), de solo lectura.
+- **Plano global** = el conocimiento compartido por toda la plataforma (la Sala A transversal multi-dominio + Salas C y D), de solo lectura.
 - **Federar** = guardar un dato una vez y que los demás lo señalen por su etiqueta, en vez de copiarlo.
 - **raw vs wiki** = `raw` son las fuentes originales intocables; `wiki` son las notas que la IA escribe
   a partir de ellas.

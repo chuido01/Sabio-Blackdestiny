@@ -32,8 +32,9 @@
 ## Conocimiento federado (Salas A–D)
 - Antes de buscar o guardar conocimiento, **lee `04-Recursos/00-INDICE-DE-INDICES.md`** (el espinazo:
   qué prefijo de ID vive en qué Sala).
-- **Sala A · Investigación** (bóveda) · **Sala B · Catálogo** · **Sala C · Referencia** 🌐 ·
+- **Sala A · Investigación** (bóveda; en el hub es **transversal y multi-dominio** 🌐) · **Sala B · Catálogo** · **Sala C · Referencia** 🌐 ·
   **Sala D · Aprendizaje** 🌐.
+- **Sala A multi-dominio:** la bóveda del hub aloja investigación transversal de varios dominios; un dominio nuevo = clave `dominio:<slug>` + nota-índice (MOC) en la **única** bóveda, **nunca** una bóveda nueva por tema (`sabio-shared` expone una sola).
 - **Reglas:** un dato vive en UNA sola Sala; las demás lo referencian por ID (**nunca copiar**). Respeta
   el `LEEME - Esquema` de cada Sala. La Sala C solo se alimenta de fuente oficial citada.
 

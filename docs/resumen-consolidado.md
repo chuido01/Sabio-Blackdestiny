@@ -51,9 +51,9 @@ Son la **arquitectura** (los cimientos del sistema):
 ## 5. Los dos planos: global y local
 
 - **Plano global — el Centro de Mando.** Lo que es igual para todos vive aquí **una sola vez** y es
-  de **solo lectura**: las normas (Sala C) y las lecciones transversales que se promueven (Sala D).
+  de **solo lectura**: la investigación transversal (Sala A, hoy **multi-dominio**), las normas (Sala C) y las lecciones transversales que se promueven (Sala D).
 - **Plano local — cada proyecto.** Lo propio de cada proyecto, dentro de su caja: su investigación
-  (Sala A), su catálogo (Sala B) y su captura de aprendizajes (Sala D).
+  (Sala A), su catálogo (Sala B) y su captura de aprendizajes (Sala D). *(La Sala A y la D viven en los dos planos: locales en cada proyecto, y transversales/multi-dominio en el Centro.)*
 
 **La única conexión va hacia arriba y es de solo lectura:** un proyecto puede *consultar* el plano
 global (vía un puente llamado MCP `sabio-shared`), pero **jamás** lee la carpeta de otro proyecto.
@@ -67,7 +67,7 @@ Cada dato es de un tipo, y por eso vive en una Sala concreta (como cuatro estant
 
 | Sala | Qué guarda | Etiqueta (ID) |
 |---|---|---|
-| **A · Investigación** | Lo que estudias: notas cortas (una idea por nota) enlazadas entre sí. Es la bóveda. | `investigacion:<tema>` |
+| **A · Investigación** | Lo que estudias: notas cortas (una idea por nota) enlazadas entre sí. Es la bóveda. La del Centro es **multi-dominio** (un dominio nuevo = etiqueta + mapa, no una bóveda aparte). | `investigacion:<tema>` |
 | **B · Catálogo** | Tus herramientas y activos: fichas de qué tienes, para qué sirve, qué cuesta. | `activo:<cosa>` |
 | **C · Referencia** | Normas y estándares externos (NIST, ISO, PCI). Iguales para todos → viven en el plano global. | `norma:<marco>:<código>` |
 | **D · Aprendizaje** | Lecciones de lo que pasó, para no repetir errores. | `aprendizaje:<id>` |
@@ -98,7 +98,7 @@ Esto evita duplicados y "deriva" (que dos copias del mismo dato se desincronicen
 No es un proyecto más: es el sitio que **sirve a todos los proyectos** sin ser uno de ellos.
 
 **Sus 4 trabajos:**
-1. **Guardar el conocimiento común** (el plano global: Salas C y D transversales).
+1. **Guardar el conocimiento común** (el plano global: la Sala A transversal multi-dominio + las Salas C y D transversales).
 2. **Repartir SABIO a proyectos nuevos** (el Kit).
 3. **Observar la salud de la flota** (un panel/dashboard).
 4. **Mejorar la flota sola** (el volante: agentes y comandos).
@@ -143,7 +143,7 @@ Sin esto, los proyectos serían islas que repiten trabajo. El volante hace que l
 - **Capa 1 / Capa 2** = la **arquitectura** (aislamiento + no perderse / la bóveda que recuerda).
 - **Sala A–D** = los **tipos de conocimiento** (Investigación, Catálogo, Referencia, Aprendizaje).
 - **Plano local** = el conocimiento de un proyecto, que no sale de su caja.
-- **Plano global** = el conocimiento compartido por toda la plataforma, de solo lectura.
+- **Plano global** = el conocimiento compartido por toda la plataforma (la Sala A transversal multi-dominio + Salas C y D), de solo lectura.
 - **Federar** = guardar un dato una vez y que los demás lo señalen por su etiqueta, en vez de copiarlo.
 - **raw vs wiki** = fuentes originales intocables vs. las notas que la IA escribe a partir de ellas.
 - **MCP `sabio-shared`** = el puente de solo-lectura por el que un proyecto consulta el plano global.
