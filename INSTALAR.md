@@ -48,7 +48,8 @@ Claude hará los **4 pasos** de abajo. Es seguro re-ejecutarlo: nunca sobrescrib
 Copia, desde [`entorno-claude/`](entorno-claude/) hacia la carpeta de configuración de usuario de
 Claude Code (`~/.claude/` en macOS/Linux, `%USERPROFILE%\.claude\` en Windows):
 
-- `commands/` → los skills `/aprender`, `/promover`, `/memory-lint`, `/disenar`.
+- `commands/` → los skills `/aprender`, `/promover`, `/memory-lint`, `/disenar`, y `/sabio-welcome`
+  (despliegue end-to-end de un proyecto; se ejecuta desde tu Centro de Mando Sabio).
 - `agents/` → los 6 agentes (curador SABIO, curador de investigación, revisor de código,
   commit-writer, doc-writer, seguridad).
 - `scripts/` → los hooks de sesión (recordatorio de reglas al iniciar, captura al compactar).
@@ -91,6 +92,12 @@ Usa el Kit ([`kit/`](kit/)) para crear un proyecto completo (Capa 1 + Capa 2):
   agéntico), sustituyendo `<NombreProyecto>`, `<NombreBoveda>`, `<fecha>` y `<PerfilSalaD>`.
 - Registra el MCP `sabio-shared` en el `.mcp.json` del proyecto, apuntando al `server.py` y al
   Centro de Mando del Paso 3 con **rutas absolutas reales de esta máquina**.
+- **Valida el despliegue:** corre `kit/Validar-Despliegue.ps1 -Proyecto "<ruta>"` (Windows) — o los
+  chequeos equivalentes en macOS/Linux — para comprobar que se escribió todo (estructura + aislamiento)
+  y que el canal del plano global **lee de verdad** el índice del Centro de Mando.
+
+> **Atajo:** el comando `/sabio-welcome <ruta>` hace este Paso 4 + el test + la adopción en el panel,
+> en un solo paso. Úsalo desde tu Centro de Mando Sabio una vez instalado el entorno (Paso 1).
 
 > **Perfil del proyecto:** `base` (por defecto, captura sencilla con `/aprender`) o `agentico`
 > (añade validador y confianza numérica). Sube a `agentico` solo si el proyecto ejecuta agentes/skills

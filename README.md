@@ -73,13 +73,73 @@ Todo lo que es SABIO hoy, en versión genérica y reutilizable:
 | Componente | Qué es |
 |---|---|
 | 🧰 **Kit de proyectos** | Crea un proyecto nuevo completo (carpetas, git aislado, bóveda y las 4 Salas), en perfil **básico** o **agéntico**. |
+| 🚀 **Despliegue end-to-end** | `/sabio-welcome <ruta>` crea el proyecto, lo **prueba** (estructura + canal del plano global, con un test determinista) y lo adopta en el dashboard — en un solo paso. Incluye el test `kit/Validar-Despliegue.ps1`. |
 | 🏛 **Centro de Mando Sabio** | El molde del *hub* / plano global que sirve a todos tus proyectos. |
 | 🔌 **MCP `sabio-shared`** | El puente de solo-lectura para que un proyecto consulte el plano global. |
 | 🤖 **Autoaprendizaje** | El perfil agéntico de la Sala D: captura + validador de aprendizajes. |
-| ⌨️ **Skills / comandos** | `/aprender`, `/promover`, `/memory-lint`, `/disenar`. |
+| ⌨️ **Skills / comandos** | `/aprender`, `/promover`, `/memory-lint`, `/disenar`, `/sabio-welcome`. |
 | 🧠 **Agentes** | Curador de SABIO, curador de investigación, revisor de código, escritor de commits, de documentación y de seguridad. |
 | 📊 **Dashboard de flota** | Panel **offline** (Python + HTML) que muestra la salud de tus proyectos (git, SABIO, backups, seguridad) y qué atender primero ([`dashboard/`](dashboard/)). |
 | 📚 **Guías** | Documentación visual "en cristiano" de cada componente ([`docs/`](docs/)). |
+
+---
+
+## Estructura del repositorio
+
+Cada archivo, con su rol. Lo **generado** (entornos `.venv/`, `flota.config.json`, `estado-flota.json`,
+`panel/datos/`) no se versiona: se crea en tu máquina al instalar/escanear.
+
+```text
+sabio-blackdestiny/
+├── README.md                         # este archivo: qué es SABIO y qué incluye
+├── INSTALAR.md                       # guía de instalación que Claude Code ejecuta (4 pasos)
+├── LICENSE                           # licencia MIT
+├── .gitignore                        # ignora venvs, config local y datos generados
+│
+├── kit/                              # 🧰 crea proyectos nuevos completos (Capa 1 + Capa 2)
+│   ├── Crear-Proyecto.ps1            #   despliega un proyecto entero en un paso (idempotente)
+│   ├── Actualizar-Proyecto.ps1       #   propaga el estándar a proyectos ya existentes (ADD-ONLY)
+│   ├── Validar-Despliegue.ps1        #   🚀 TEST del despliegue: estructura + aislamiento + canal global
+│   ├── LEEME - Crear un proyecto nuevo.md
+│   ├── Chuleta de Prompts - Investigacion e Ingesta.md   # prompts para poblar la bóveda
+│   ├── _proyecto/CLAUDE.md           #   molde del CLAUDE.md del proyecto (árbol + reglas + federado)
+│   ├── _plantilla/                   #   molde de la BÓVEDA (Sala A): CLAUDE.md, index.md, log.md, templates/, raw/, wiki/
+│   ├── _federado/                    #   molde del CEREBRO FEDERADO: índice de índices + Salas B/C/D con sus LEEME
+│   └── _perfiles/agentico/           #   overlay opcional: Sala D agéntica (ESQUEMA + validador + ejemplo)
+│
+├── centro-de-mando-sabio/            # 🏛 molde del hub / plano global (móntalo una vez)
+│   ├── CLAUDE.md                     #   el rol del hub
+│   └── LEEME - Montar tu Centro de Mando Sabio.md
+│
+├── mcp/                              # 🔌 el puente de solo-lectura al plano global
+│   ├── server.py                     #   servidor MCP sabio-shared (stdio, read-only, 4 herramientas)
+│   ├── requirements.txt              #   dependencias: mcp + pydantic
+│   └── README.md                     #   qué expone, seguridad y cómo registrarlo en un proyecto
+│
+├── dashboard/                        # 📊 panel offline de salud de la flota (multiplataforma)
+│   ├── escanear-flota.py             #   el escáner (motor portable; Windows · macOS · Linux)
+│   ├── Escanear-Flota.ps1            #   envoltura Windows (llama al .py)
+│   ├── Abrir-Panel.cmd               #   doble-clic en Windows (re-escanea y abre el panel)
+│   ├── flota.config.example.json     #   plantilla de config (cópiala a flota.config.json, local)
+│   ├── README.md                     #   cómo configurarlo, qué mide y los arquetipos/semáforo
+│   └── panel/                        #   el panel: index.html · estilos/ (tokens.css, panel.css) · app/ (5 módulos JS)
+│
+├── entorno-claude/                   # ⌨️🤖 tu entorno de Claude Code (se instala en ~/.claude)
+│   ├── Aplicar-Setup.ps1             #   copia el entorno a ~/.claude (con respaldo)
+│   ├── Sincronizar-Setup.ps1         #   vuelca tu ~/.claude de regreso al repo (para versionarlo)
+│   ├── README.md                     #   qué hace cada pieza del entorno
+│   └── home-claude/                  #   el contenido que va a ~/.claude:
+│       ├── CLAUDE.md                 #     preferencias transversales (plantilla genérica)
+│       ├── settings.json             #     ajustes + hooks de sesión
+│       ├── commands/                 #     skills: aprender · promover · memory-lint · disenar · sabio-welcome
+│       ├── agents/                   #     6 agentes: sabio-curator · research-curator · code-reviewer · commit-writer · doc-writer · security-engineer
+│       └── scripts/                  #     hooks: recordatorio al iniciar sesión · captura al compactar
+│
+└── docs/                             # 📚 guías "en cristiano"
+    ├── guia-sabio.md                 #   qué es SABIO y cómo se usa, sin jerga
+    ├── resumen-consolidado.md        #   visión integral en una pasada
+    └── media/sabio-infografia.png    #   infografía de portada
+```
 
 ---
 

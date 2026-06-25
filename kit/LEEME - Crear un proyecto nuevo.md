@@ -90,6 +90,10 @@ Cuando termines, muéstrame el árbol creado y confírmame que el repo quedó ai
    directamente; la segmentación la dan el aislamiento del proyecto + la regla «Acceso a Obsidian».
 2. **Poblar la bóveda:** usa la **`Chuleta de Prompts - Investigacion e Ingesta.md`** (incluida).
 3. **Verificar en Obsidian (opcional):** abre la carpeta de la bóveda como vault para ver el grafo.
+4. **Validar el despliegue (recomendado):** corre `Validar-Despliegue.ps1 -Proyecto "<ruta>"` — un
+   test que confirma que se escribió todo (estructura + aislamiento) y que, si conectaste el plano
+   global, el canal **lee de verdad** el índice del Centro de Mando. El comando `/sabio-welcome <ruta>`
+   automatiza crear + validar + adoptar en el panel, en un solo paso.
 
 ---
 
@@ -99,6 +103,7 @@ Cuando termines, muéstrame el árbol creado y confírmame que el repo quedó ai
 kit/
 ├── Crear-Proyecto.ps1                          (el script único: proyecto + bóveda)
 ├── Actualizar-Proyecto.ps1                     (propaga el estándar a proyectos existentes)
+├── Validar-Despliegue.ps1                      (TEST: estructura + aislamiento + canal del plano global)
 ├── LEEME - Crear un proyecto nuevo.md          (este archivo)
 ├── Chuleta de Prompts - Investigacion e Ingesta.md
 ├── _proyecto/CLAUDE.md       (plantilla del CLAUDE.md del PROYECTO)
