@@ -76,9 +76,9 @@ Todo lo que es SABIO hoy, en versión genérica y reutilizable:
 | 🚀 **Despliegue end-to-end** | `/sabio-welcome <ruta>` crea el proyecto, lo **prueba** (estructura + canal del plano global, con un test determinista) y lo adopta en el dashboard — en un solo paso. Incluye el test `kit/Validar-Despliegue.ps1`. |
 | 🏛 **Centro de Mando Sabio** | El molde del *hub* / plano global que sirve a todos tus proyectos. |
 | 🔌 **MCP `sabio-shared`** | El puente de solo-lectura para que un proyecto consulte el plano global. |
-| 🤖 **Autoaprendizaje** | El perfil agéntico de la Sala D: captura + validador de aprendizajes. |
-| ⌨️ **Skills / comandos** | `/aprender`, `/promover`, `/memory-lint`, `/disenar`, `/sabio-welcome`. |
-| 🧠 **Agentes** | Curador de SABIO, curador de investigación, revisor de código, escritor de commits, de documentación y de seguridad. |
+| 🤖 **Autoaprendizaje** | El patrón **Reflector** (agente `sabio-reflector`): reflexiona con feedback externo e infiere la lección antes de guardarla. Más el perfil agéntico de la Sala D: captura + validador. |
+| ⌨️ **Skills / comandos** | `/aprender`, `/sabio-reflector`, `/promover`, `/memory-lint`, `/disenar`, `/sabio-welcome`. |
+| 🧠 **Agentes** | Curador de SABIO, reflector de auto-mejora, curador de investigación, revisor de código, escritor de commits, de documentación y de seguridad. |
 | 📊 **Dashboard de flota** | Panel **offline** (Python + HTML) que muestra la salud de tus proyectos (git, SABIO, backups, seguridad) y qué atender primero ([`dashboard/`](dashboard/)). |
 | 📚 **Guías** | Documentación visual "en cristiano" de cada componente ([`docs/`](docs/)). |
 
@@ -131,8 +131,8 @@ sabio-blackdestiny/
 │   └── home-claude/                  #   el contenido que va a ~/.claude:
 │       ├── CLAUDE.md                 #     preferencias transversales (plantilla genérica)
 │       ├── settings.json             #     ajustes + hooks de sesión
-│       ├── commands/                 #     skills: aprender · promover · memory-lint · disenar · sabio-welcome
-│       ├── agents/                   #     6 agentes: sabio-curator · research-curator · code-reviewer · commit-writer · doc-writer · security-engineer
+│       ├── commands/                 #     skills: aprender · sabio-reflector · promover · memory-lint · disenar · sabio-welcome
+│       ├── agents/                   #     7 agentes: sabio-curator · sabio-reflector · research-curator · code-reviewer · commit-writer · doc-writer · security-engineer
 │       └── scripts/                  #     hooks: recordatorio al iniciar sesión · captura al compactar
 │
 └── docs/                             # 📚 guías "en cristiano"

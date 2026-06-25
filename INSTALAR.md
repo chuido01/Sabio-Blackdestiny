@@ -48,9 +48,9 @@ Claude hará los **4 pasos** de abajo. Es seguro re-ejecutarlo: nunca sobrescrib
 Copia, desde [`entorno-claude/`](entorno-claude/) hacia la carpeta de configuración de usuario de
 Claude Code (`~/.claude/` en macOS/Linux, `%USERPROFILE%\.claude\` en Windows):
 
-- `commands/` → los skills `/aprender`, `/promover`, `/memory-lint`, `/disenar`, y `/sabio-welcome`
+- `commands/` → los skills `/aprender`, `/sabio-reflector`, `/promover`, `/memory-lint`, `/disenar`, y `/sabio-welcome`
   (despliegue end-to-end de un proyecto; se ejecuta desde tu Centro de Mando Sabio).
-- `agents/` → los 6 agentes (curador SABIO, curador de investigación, revisor de código,
+- `agents/` → los 7 agentes (curador SABIO, reflector de auto-mejora, curador de investigación, revisor de código,
   commit-writer, doc-writer, seguridad).
 - `scripts/` → los hooks de sesión (recordatorio de reglas al iniciar, captura al compactar).
 - `CLAUDE.md` → preferencias transversales (plantilla genérica; el usuario la edita).
@@ -123,7 +123,7 @@ Verifica la instalación de SABIO: lista los comandos y agentes en ~/.claude, co
 el MCP sabio-shared responde, y muéstrame el árbol del proyecto que creaste.
 ```
 
-Deberías ver: los 4 comandos, los 6 agentes, el MCP `sabio-shared` conectado y un proyecto con sus
+Deberías ver: los 6 comandos, los 7 agentes, el MCP `sabio-shared` conectado y un proyecto con sus
 5 carpetas + las 4 Salas.
 
 ---

@@ -65,7 +65,7 @@ etiquetas distintas.
   todos, así que viven una sola vez en el plano global y todos los consultan. Etiqueta:
   `norma:<marco>:<código>`.
 - **Sala D · Aprendizaje** — Lecciones de lo que pasó, para no repetir errores: "la próxima vez, hazlo
-  así". Se llena de **dos formas**: al **construir** (tú o Claude lo anotáis con `/aprender`) y, en
+  así". Se llena de **dos formas**: al **construir** —con `/aprender` (rápido) o **`/sabio-reflector`** (reflexiona con feedback externo e infiere la causa)— y, en
   proyectos con agentes, **automáticamente** cuando un agente ejecuta. Etiqueta: `aprendizaje:<id>`.
 
 > **Dos perfiles, según el proyecto.** Un proyecto de documentación usa el perfil **base** (captura

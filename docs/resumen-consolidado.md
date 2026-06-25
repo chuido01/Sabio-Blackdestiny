@@ -129,11 +129,13 @@ estructura). Nunca lee ni mezcla el conocimiento de un proyecto con otro.
 Sin esto, los proyectos serían islas que repiten trabajo. El volante hace que lo bueno se contagie:
 
 - **Agentes** — ayudantes especializados disponibles en todos los proyectos (revisor de código,
-  escritor de commits, de documentación, curador de investigación, curador de SABIO, de seguridad).
+  escritor de commits, de documentación, curador de investigación, curador de SABIO, reflector de auto-mejora, de seguridad).
 - **`/promover`** — sube una lección genérica al plano global (una sola copia) para que todos la usen.
 - **`/memory-lint`** — vigila que no haya conocimiento duplicado ni desactualizado. Por defecto solo
   reporta, no toca nada.
 - **`/aprender`** — captura una lección en la Sala D local (la puerta de entrada).
+- **`/sabio-reflector`** — reflexiona sobre un trabajo cerrado con feedback externo e infiere la lección
+  antes de guardarla (la captura inteligente; hermana de `/aprender`).
 - **`/disenar`** — ante una duda de diseño, da una recomendación equilibrando simplicidad y estructura.
 
 ---

@@ -19,7 +19,7 @@
 - **2 planos:** conocimiento **local** por proyecto + un **plano global** (Centro de Mando Sabio) que guarda la referencia canónica transversal (`norma:…`) e investigación compartida, accesible **solo-lectura** vía `sabio-shared`.
 
 ## Captura de aprendizajes (Sala D)
-- Al cerrar un trabajo no trivial, si apareció un *gotcha*, un error ya resuelto o un mejor camino, **ofrece capturarlo con `/aprender`** (captura local en la Sala D del proyecto activo). No guardes sin tu OK, no interrumpas por nimiedades, ni conviertas la Sala D en bitácora. La salida es `/promover`.
+- Al cerrar un trabajo no trivial, si apareció un *gotcha*, un error ya resuelto o un mejor camino, **ofrece capturarlo** (captura local en la Sala D del proyecto activo): **`/aprender`** para captura rápida, o **`/sabio-reflector`** cuando haya **feedback externo** que valga analizar (test, ejecución, tu reacción) — infiere la causa antes de guardar. No guardes sin tu OK, no interrumpas por nimiedades, ni conviertas la Sala D en bitácora. La salida es `/promover`.
 
 ## Decisiones de diseño — comando `/disenar`
 - Ante una **duda de diseño** (¿abstraer o duplicar?, ¿añadir capas o mantener simple?), invoca **`/disenar`**: secuencia KISS/YAGNI → DRY/SOLID/DDD → Clean Arch, **Regla de Tres** como dial y **legibilidad** como desempate.
