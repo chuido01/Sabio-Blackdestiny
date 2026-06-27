@@ -1,11 +1,5 @@
 # SABIO Blackdestiny
 
-> Consolida las 4 guías por componente
-> (SABIO · Centro de Mando · Proyectos · Mapa de Archivos) en lenguaje llano.
-> Pensado para explicar **todos los conceptos** a alguien que parte de cero.
-
----
-
 ## 1. Qué es SABIO (la idea en una frase)
 
 SABIO es la **memoria a largo plazo para trabajar con una IA**: un sitio ordenado donde cada cosa
@@ -147,18 +141,7 @@ Sin esto, los proyectos serían islas que repiten trabajo. El volante hace que l
 - **Capa 1 / Capa 2** = la **arquitectura** (aislamiento + no perderse / la bóveda que recuerda).
 - **Sala A–D** = los **tipos de conocimiento** (Investigación, Catálogo, Referencia, Aprendizaje).
 - **Plano local** = el conocimiento de un proyecto, que no sale de su caja.
-- **Plano global** = el conocimiento compartido por toda la plataforma (la Sala A transversal multi-dominio + Salas C y D), de solo lectura.
+- **Plano global** = el conocimiento compartido por toda la plataforma, de solo lectura.
 - **Federar** = guardar un dato una vez y que los demás lo señalen por su etiqueta, en vez de copiarlo.
 - **raw vs wiki** = fuentes originales intocables vs. las notas que la IA escribe a partir de ellas.
 - **MCP `sabio-shared`** = el puente de solo-lectura por el que un proyecto consulta el plano global.
-
----
-
-### Ideas clave para el infográfico (lo esencial que debe verse)
-
-1. **SABIO Blackdestiny = memoria a largo plazo para trabajar con IA, sin RAG.**
-2. **Dos olvidos + un desorden** → los tres problemas que resuelve.
-3. **2 planos** (global de solo lectura ↑ y local aislado) con **una sola flecha hacia arriba**.
-4. **4 Salas** (A·Investigación, B·Catálogo, C·Referencia, D·Aprendizaje).
-5. **Un dato, un solo hogar** → federación por ID, cero copias.
-6. **El Kit** crea proyectos iguales; **el volante** contagia lo aprendido a todos.
