@@ -203,6 +203,45 @@ except Exception:
 }
 
 # =====================================================================================
+# 4) HOMOGENEIDAD (convergencia generacional + andamiaje vigente)
+# =====================================================================================
+$kit = $PSScriptRoot
+function Get-Gen([string]$ruta) {
+  if (-not (Test-Path $ruta)) { return -1 }
+  $l = Get-Content -LiteralPath $ruta -TotalCount 1 -ErrorAction SilentlyContinue
+  if ($l -match 'sabio-generacion:\s*local') { return 'local' }
+  if ($l -match 'sabio-generacion:\s*(\d+)') { return [int]$Matches[1] }
+  return 0
+}
+$bovCmd = if ($boveda) { Join-Path $boveda.FullName "CLAUDE.md" } else { $null }
+$artes = @(
+  @{ et = "espinazo";       proy = (Join-Path $recursos "00-INDICE-DE-INDICES.md");                 kit = (Join-Path $kit "_federado\00-INDICE-DE-INDICES.md") },
+  @{ et = "LEEME Sala B";   proy = (Join-Path $recursos "02-Catalogo\LEEME - Esquema Sala B.md");    kit = (Join-Path $kit "_federado\02-Catalogo\LEEME - Esquema Sala B.md") },
+  @{ et = "LEEME Sala C";   proy = (Join-Path $recursos "03-Referencia\LEEME - Esquema Sala C.md");  kit = (Join-Path $kit "_federado\03-Referencia\LEEME - Esquema Sala C.md") },
+  @{ et = "LEEME Sala D";   proy = (Join-Path $recursos "04-Aprendizaje\LEEME - Esquema Sala D.md"); kit = (Join-Path $kit "_federado\04-Aprendizaje\LEEME - Esquema Sala D.md") },
+  @{ et = "esquema boveda"; proy = $bovCmd;                                                          kit = (Join-Path $kit "_plantilla\CLAUDE.md") }
+)
+foreach ($a in $artes) {
+  if (-not $a.proy) { continue }
+  $gc = Get-Gen $a.kit
+  $gp = Get-Gen $a.proy
+  if ($gp -eq 'local')      { Add-Check "homogeneidad: $($a.et)" "PASS" "opt-out local (intencional)" }
+  elseif ($gp -eq -1)       { Add-Check "homogeneidad: $($a.et)" "FAIL" "falta el artefacto" }
+  elseif ($gp -ge $gc)      { Add-Check "homogeneidad: $($a.et)" "PASS" "gen $gp (canonica $gc)" }
+  else                      { Add-Check "homogeneidad: $($a.et)" "FAIL" "gen $gp < canonica $gc (corre /sabio-converger)" }
+}
+Check-Existe "buzon de promocion (promociones\)" (Join-Path $recursos "04-Aprendizaje\promociones")
+if ($bovCmd -and (Test-Path $bovCmd)) {
+  $tb = [System.IO.File]::ReadAllText($bovCmd, [System.Text.Encoding]::UTF8)
+  if ($tb -match 'MOC-first') { Add-Check "homogeneidad: navegacion MOC-first" "PASS" }
+  else { Add-Check "homogeneidad: navegacion MOC-first" "FAIL" "el esquema de boveda no trae la regla MOC-first" }
+}
+# Sala D: estado de la unificacion fisica (ESQUEMA estandar en todos)
+$esquemaSalaD = Join-Path $recursos "04-Aprendizaje\ESQUEMA.md"
+if (Test-Path $esquemaSalaD) { Add-Check "Sala D: forma unificada (ESQUEMA presente)" "PASS" -NoCritico }
+else { Add-Check "Sala D: forma unificada (ESQUEMA presente)" "WARN" "perfil base sin ESQUEMA: unificacion fisica pendiente" -NoCritico }
+
+# =====================================================================================
 # Resumen
 # =====================================================================================
 $nPass = @($resultados | Where-Object { $_.Estado -eq "PASS" }).Count
