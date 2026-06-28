@@ -1,8 +1,7 @@
 # SABIO Blackdestiny
 
-<p align="center">
-  <img src="docs/media/sabio-infografia.png" alt="SABIO — La memoria a largo plazo para trabajar con IA" width="860">
-</p>
+<img width="2752" height="1536" alt="SABIO__Cerebro_para_memoria_IA" src="https://github.com/user-attachments/assets/3d0b5db7-973b-412f-a5f4-b42d67b10a23" />
+
 
 > **La memoria a largo plazo para trabajar con IA — sin base de datos vectorial, sin RAG.**
 > Un sistema de archivos de texto, bóvedas-wiki e índices que tu asistente (Claude Code) lee
