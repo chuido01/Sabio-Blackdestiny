@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Crea un PROYECTO NUEVO completo (Capa 1 + Capa 2) en un solo paso.
 
@@ -9,10 +9,10 @@
     2. Inicializa el repositorio git del proyecto (memoria aislada).
     3. Crea el .gitignore basico.
     4. Crea el CLAUDE.md del proyecto desde la plantilla _proyecto\CLAUDE.md
-       (incluye el arbol de carpetas y la regla "Acceso a Obsidian" ya escrita).
+       (incluye el arbol de carpetas y la regla "Acceso a la bóveda" ya escrita).
     5. Crea 00-Documentacion\00 - LEEME.md.
     6. Crea la boveda de Capa 2 (wiki LLM) copiando la plantilla canonica _plantilla a:
-         04-Recursos\01-Vault Obsidian\<NombreBoveda>\
+         04-Recursos\01-Boveda\<NombreBoveda>\
     7. Crea el CEREBRO FEDERADO en 04-Recursos (plantillas de _federado):
          00-INDICE-DE-INDICES.md (namespace de IDs) + 02-Catalogo (Sala B) +
          03-Referencia (Sala C) + 04-Aprendizaje (Sala D), cada una con su LEEME-Esquema.
@@ -32,7 +32,7 @@
   Nombre del proyecto para el CLAUDE.md. Por defecto: el nombre de la carpeta destino.
 
 .PARAMETER NombreBoveda
-  Nombre de la boveda Obsidian. Por defecto: "Memoria_" + nombre de la carpeta.
+  Nombre de la boveda. Por defecto: "Memoria_" + nombre de la carpeta.
 
 .PARAMETER PerfilSalaD
   Perfil de la Sala D: "base" (default) o "agentico" (anade validador y confianza numerica).
@@ -67,11 +67,9 @@ $saltos = New-Object System.Collections.Generic.List[string]
 $plantillaBoveda   = Join-Path $PSScriptRoot "_plantilla"
 $plantillaProyecto = Join-Path $PSScriptRoot "_proyecto\CLAUDE.md"
 $plantillaFederado = Join-Path $PSScriptRoot "_federado"
-$plantillaPerfilAgentico = Join-Path $PSScriptRoot "_perfiles\agentico"
 if (-not (Test-Path $plantillaBoveda))   { throw "No encuentro la plantilla de boveda en: $plantillaBoveda" }
 if (-not (Test-Path $plantillaProyecto)) { throw "No encuentro la plantilla de proyecto en: $plantillaProyecto" }
 if (-not (Test-Path $plantillaFederado)) { throw "No encuentro la plantilla federada en: $plantillaFederado" }
-if ($PerfilSalaD -eq "agentico" -and -not (Test-Path $plantillaPerfilAgentico)) { throw "No encuentro el overlay del perfil agentico en: $plantillaPerfilAgentico" }
 
 # 1) Resolver destino y nombres
 if (-not (Test-Path $ProyectoDestino)) {
@@ -113,7 +111,7 @@ if (-not (Test-Path $gi)) {
   $hechos.Add(".gitignore creado")
 } else { $saltos.Add(".gitignore ya existia") }
 
-# 5) CLAUDE.md del proyecto (con arbol de carpetas + regla Acceso a Obsidian)
+# 5) CLAUDE.md del proyecto (con arbol de carpetas + regla Acceso a la bóveda)
 $claudeMd = Join-Path $ProyectoDestino "CLAUDE.md"
 if (-not (Test-Path $claudeMd)) {
   $txt = [System.IO.File]::ReadAllText($plantillaProyecto, [System.Text.Encoding]::UTF8)
@@ -122,16 +120,16 @@ if (-not (Test-Path $claudeMd)) {
   $hechos.Add("CLAUDE.md creado (perfil Sala D: $PerfilSalaD; rellena los <RELLENAR> con tus datos)")
 } else {
   $txtExistente = [System.IO.File]::ReadAllText($claudeMd, [System.Text.Encoding]::UTF8)
-  if ($txtExistente -notmatch "Acceso a Obsidian") {
+  if ($txtExistente -notmatch "Acceso a la bóveda") {
     $regla = "`r`n## Que es SABIO (la memoria de este proyecto)`r`n" +
-      "**SABIO** (*Sistema de Archivos, Bovedas e Indices Organizados*) es el sistema de memoria y conocimiento del proyecto: SIN RAG (gestion de contexto nativa de Claude Code + una boveda-wiki en Obsidian estilo Karpathy), con el conocimiento federado en 4 Salas (A.Investigacion = la boveda . B.Catalogo . C.Referencia . D.Aprendizaje) unidas por el indice de indices (``04-Recursos/00-INDICE-DE-INDICES.md``).`r`n" +
-      "`r`n## Acceso a Obsidian`r`n" +
-      "- La **unica** boveda de Obsidian que este proyecto puede usar es **$NombreBoveda**, ubicada en ``04-Recursos/01-Vault Obsidian/$NombreBoveda/`` (dentro de la carpeta del proyecto).`r`n" +
+      "**SABIO** (*Sistema de Archivos, Bovedas e Indices Organizados*) es el sistema de memoria y conocimiento del proyecto: SIN RAG (gestion de contexto nativa de Claude Code + una boveda-wiki estilo Karpathy), con el conocimiento federado en 4 Salas (A.Investigacion = la boveda . B.Catalogo . C.Referencia . D.Aprendizaje) unidas por el indice de indices (``04-Recursos/00-INDICE-DE-INDICES.md``).`r`n" +
+      "`r`n## Acceso a la bóveda`r`n" +
+      "- La **unica** boveda que este proyecto puede usar es **$NombreBoveda**, ubicada en ``04-Recursos/01-Boveda/$NombreBoveda/`` (dentro de la carpeta del proyecto).`r`n" +
       "- El acceso es **nativo**: estando dentro del proyecto, Claude edita los ``.md`` directamente. **No se usa MCP.**`r`n" +
       "- **No** accedas a bovedas, datos ni investigaciones de otros proyectos, ni mezcles su informacion con la de este.`r`n"
     [System.IO.File]::WriteAllText($claudeMd, $txtExistente + $regla, $utf8)
-    $hechos.Add("CLAUDE.md ya existia: se anadio la descripcion de SABIO + la regla 'Acceso a Obsidian'")
-  } else { $saltos.Add("CLAUDE.md ya existia (con regla de Obsidian incluida)") }
+    $hechos.Add("CLAUDE.md ya existia: se anadio la descripcion de SABIO + la regla 'Acceso a la bóveda'")
+  } else { $saltos.Add("CLAUDE.md ya existia (con regla de la bóveda incluida)") }
 }
 
 # 6) LEEME del proyecto
@@ -142,8 +140,8 @@ if (-not (Test-Path $leeme)) {
   $hechos.Add("00-Documentacion\00 - LEEME.md creado")
 } else { $saltos.Add("00 - LEEME.md ya existia") }
 
-# 7) Boveda de Capa 2 en 04-Recursos\01-Vault Obsidian\<NombreBoveda>
-$padre  = Join-Path $ProyectoDestino "04-Recursos\01-Vault Obsidian"
+# 7) Boveda de Capa 2 en 04-Recursos\01-Boveda\<NombreBoveda>
+$padre  = Join-Path $ProyectoDestino "04-Recursos\01-Boveda"
 $boveda = Join-Path $padre $NombreBoveda
 if (-not (Test-Path $boveda)) {
   New-Item -ItemType Directory -Force -Path $padre | Out-Null
@@ -154,7 +152,7 @@ if (-not (Test-Path $boveda)) {
     $txt = $txt.Replace("<NombreBoveda>", $NombreBoveda).Replace("<fecha>", $fecha)
     [System.IO.File]::WriteAllText($p, $txt, $utf8)
   }
-  $hechos.Add("Boveda Capa 2 creada: 04-Recursos\01-Vault Obsidian\$NombreBoveda\")
+  $hechos.Add("Boveda Capa 2 creada: 04-Recursos\01-Boveda\$NombreBoveda\")
 } else { $saltos.Add("La boveda ya existia (no se toco): $boveda") }
 
 # 8) Cerebro federado: indice de indices + salas B, C y D en 04-Recursos
@@ -178,20 +176,9 @@ foreach ($pieza in @("00-INDICE-DE-INDICES.md", "02-Catalogo", "03-Referencia", 
   } else { $saltos.Add("Federado: 04-Recursos\$pieza ya existia") }
 }
 
-# 8b) Perfil agentico: superponer el overlay (ESQUEMA.md + tools + ejemplo sintetico), ADD-ONLY
-if ($PerfilSalaD -eq "agentico") {
-  $overlayAp = Join-Path $plantillaPerfilAgentico "04-Aprendizaje"
-  $destAp    = Join-Path $recursos "04-Aprendizaje"
-  foreach ($item in (Get-ChildItem -Path $overlayAp -Recurse -File)) {
-    $rel = $item.FullName.Substring($overlayAp.Length).TrimStart('\')
-    $destFile = Join-Path $destAp $rel
-    if (-not (Test-Path $destFile)) {
-      New-Item -ItemType Directory -Force -Path (Split-Path $destFile) | Out-Null
-      Copy-Item -Path $item.FullName -Destination $destFile
-      $hechos.Add("Perfil agentico: 04-Aprendizaje\$rel")
-    } else { $saltos.Add("Perfil agentico: 04-Aprendizaje\$rel ya existia") }
-  }
-}
+# 8b) Sala D: una sola forma fisica. ESQUEMA.md + tools/ + promociones/ vienen en _federado/04-Aprendizaje
+#     y se desplegaron en el paso 8 (Copy-Item -Recurse). El perfil 'agentico' es solo un FLAG de
+#     comportamiento que se declara en el CLAUDE.md del proyecto; no superpone otra estructura.
 
 # 8c) .mcp.json con el MCP sabio-shared (solo-lectura del plano global). ADD-ONLY.
 #     Necesita -CentroDeMando (ruta raiz de tu Centro de Mando Sabio). Si no se da, se omite
@@ -235,7 +222,7 @@ if ([string]::IsNullOrWhiteSpace($CentroDeMando)) {
 Write-Host ""
 Write-Host "================  PROYECTO LISTO (Capa 1 + Capa 2)  ================" -ForegroundColor Green
 Write-Host ("  Proyecto : " + $ProyectoDestino)
-Write-Host ("  Boveda   : 04-Recursos\01-Vault Obsidian\" + $NombreBoveda + "  (Sala A)")
+Write-Host ("  Boveda   : 04-Recursos\01-Boveda\" + $NombreBoveda + "  (Sala A)")
 Write-Host  "  Federado : 04-Recursos\00-INDICE-DE-INDICES.md + Salas B/C/D con sus esquemas"
 Write-Host ""
 if ($hechos.Count -gt 0) {

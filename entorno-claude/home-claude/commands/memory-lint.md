@@ -22,6 +22,7 @@ Ejecuta un **lint de memoria/conocimiento** para el **proyecto actual**, haciend
    - Preferencia **transversal** (cómo trabajar, gustos) → `~/.claude/CLAUDE.md`.
    - Hecho **específico del proyecto** → el `CLAUDE.md` del proyecto o su Sala (según el tipo).
    - **Conocimiento federado** (investigación, ficha, norma, aprendizaje) → su Sala dueña, referenciado por ID.
+4. **Entorno IA: versionado ↔ desplegado** (*solo cuando el proyecto activo es el **Centro de Mando***, donde vive el repo del entorno). Compara `01-Produccion/Kit-SABIO/02-Entorno-Claude/home-claude/` con `~/.claude/` (al menos `settings.json`; idealmente `agents/`, `commands/`, hooks) y reporta el *drift*. **Fuente de verdad = lo desplegado y funcional:** si difieren, alinea el repo versionado a `~/.claude` (no al revés), salvo que sea un cambio deliberado aún sin desplegar. *Aislamiento:* este check **no aplica en otros proyectos** (no tienen repo de entorno propio).
 
 ## Reglas
 - **Aislamiento:** solo el proyecto actual. No leas ni toques otros proyectos (única excepción: **leer** el plano global vía `sabio-shared`).
@@ -29,4 +30,4 @@ Ejecuta un **lint de memoria/conocimiento** para el **proyecto actual**, haciend
 - Respeta el `LEEME - Esquema` de cada Sala y el esquema del `CLAUDE.md` de la bóveda.
 
 ## Salida
-Un **informe** con: duplicados (con la fuente canónica propuesta), *drift*/hechos obsoletos, `[[enlaces]]` rotos, notas huérfanas, colisiones entre capas, y copias que deberían ser punteros al plano global. Si corriste con `--fix`, añade qué se aplicó y qué quedó pendiente de confirmación.
+Un **informe** con: duplicados (con la fuente canónica propuesta), *drift*/hechos obsoletos, `[[enlaces]]` rotos, notas huérfanas, colisiones entre capas, copias que deberían ser punteros al plano global, y **drift del entorno IA versionado ↔ desplegado** (en el Centro). Si corriste con `--fix`, añade qué se aplicó y qué quedó pendiente de confirmación.

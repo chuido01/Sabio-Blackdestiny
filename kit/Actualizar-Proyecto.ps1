@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Propaga (idempotente, ADD-ONLY) los activos TRANSVERSALES del Kit a proyectos EXISTENTES.
 
@@ -10,7 +10,7 @@
     - plantilla de nota atomica de la boveda,
     - lineas estandar de .gitignore,
     - el .mcp.json con el MCP sabio-shared (solo-lectura del plano global; ADD-ONLY; si das -CentroDeMando),
-    - las secciones transversales del CLAUDE.md (SABIO + Acceso a Obsidian + aislamiento).
+    - las secciones transversales del CLAUDE.md (SABIO + Acceso a la bóveda + aislamiento).
   Garantias:
     - NUNCA sobrescribe archivos existentes ni contenido del proyecto (notas, codigo, indices poblados).
     - Solo CREA lo que falta y APENDE lineas estandar que falten (.gitignore / CLAUDE.md).
@@ -62,10 +62,34 @@ $modo = if ($Aplicar) { "APLICAR" } else { "DRY-RUN (solo reporta; usa -Aplicar 
 $plantillaBoveda   = Join-Path $PSScriptRoot "_plantilla"
 $plantillaProyecto = Join-Path $PSScriptRoot "_proyecto\CLAUDE.md"
 $plantillaFederado = Join-Path $PSScriptRoot "_federado"
-$plantillaPerfilAgentico = Join-Path $PSScriptRoot "_perfiles\agentico"
-foreach ($p in @($plantillaBoveda, $plantillaProyecto, $plantillaFederado, $plantillaPerfilAgentico)) {
+foreach ($p in @($plantillaBoveda, $plantillaProyecto, $plantillaFederado)) {
   if (-not (Test-Path $p)) { throw "No encuentro la plantilla del Kit: $p" }
 }
+
+# --- Convergencia generacional (re-proyeccion del molde canonico) ---
+# Compara el sello `<!-- sabio-generacion: N -->` del Kit vs el del proyecto y re-proyecta lo atrasado.
+# PUROS: se sobrescriben enteros. MIXTOS: se reemplaza SOLO la region entre <!-- sabio:canonico:inicio -->
+# y <!-- sabio:canonico:fin -->, preservando lo local. Un mixto sin marcadores NO se toca (migracion manual).
+$reCanon = '(?s)<!-- sabio:canonico:inicio.*?<!-- sabio:canonico:fin -->'
+$reSello = '<!-- sabio-generacion:\s*\d+ -->'
+function Get-SabioGen([string]$ruta) {
+  if (-not (Test-Path $ruta)) { return -1 }
+  $primera = Get-Content -LiteralPath $ruta -TotalCount 1 -ErrorAction SilentlyContinue
+  if ($primera -match 'sabio-generacion:\s*local') { return 2147483647 }  # opt-out: nunca se converge
+  if ($primera -match 'sabio-generacion:\s*(\d+)') { return [int]$Matches[1] }
+  return 0
+}
+function Convert-Marcadores([string]$texto, [string]$proy, [string]$bov, [string]$fch) {
+  return $texto.Replace("<NombreProyecto>", $proy).Replace("<NombreBoveda>", $bov).Replace("<fecha>", $fch)
+}
+$artefactosFederado = @(
+  @{ rel = "00-INDICE-DE-INDICES.md"; tipo = "mixto" },
+  @{ rel = "02-Catalogo\LEEME - Esquema Sala B.md"; tipo = "puro" },
+  @{ rel = "03-Referencia\LEEME - Esquema Sala C.md"; tipo = "mixto" },
+  @{ rel = "04-Aprendizaje\LEEME - Esquema Sala D.md"; tipo = "puro" },
+  @{ rel = "04-Aprendizaje\ESQUEMA.md"; tipo = "puro" },
+  @{ rel = "04-Aprendizaje\promociones\LEEME - Buzon de promocion.md"; tipo = "puro" }
+)
 
 # 1) Resolver objetivos (gobernanza: nada sin destino explicito)
 $objetivos = @()
@@ -140,7 +164,7 @@ foreach ($proy in $objetivos) {
   $recursos = Join-Path $proy "04-Recursos"
   if (-not (Test-Path $recursos) -and $Aplicar) { New-Item -ItemType Directory -Force -Path $recursos | Out-Null }
   $nombreBoveda = ""
-  $vaultPadre = Join-Path $recursos "01-Vault Obsidian"
+  $vaultPadre = Join-Path $recursos "01-Boveda"
   if (Test-Path $vaultPadre) {
     $b = Get-ChildItem -Path $vaultPadre -Directory -ErrorAction SilentlyContinue | Select-Object -First 1
     if ($b) { $nombreBoveda = $b.Name }
@@ -180,17 +204,17 @@ foreach ($proy in $objetivos) {
   $claudeMd = Join-Path $proy "CLAUDE.md"
   if (Test-Path $claudeMd) {
     $txt = [System.IO.File]::ReadAllText($claudeMd, [System.Text.Encoding]::UTF8)
-    if ($txt -notmatch "Acceso a Obsidian") {
+    if ($txt -notmatch "Acceso a la bóveda") {
       if ($Aplicar) {
         $nb = if ($nombreBoveda) { $nombreBoveda } else { "<NombreBoveda>" }
         $regla = "`r`n## Que es SABIO (la memoria de este proyecto)`r`n" +
-          "**SABIO** (*Sistema de Archivos, Bovedas e Indices Organizados*) es el sistema de memoria y conocimiento del proyecto: SIN RAG (gestion de contexto nativa + boveda-wiki en Obsidian estilo Karpathy), federado en 4 Salas (A.Investigacion = la boveda . B.Catalogo . C.Referencia . D.Aprendizaje) unidas por el indice de indices (``04-Recursos/00-INDICE-DE-INDICES.md``).`r`n" +
-          "`r`n## Acceso a Obsidian`r`n" +
-          "- La **unica** boveda de Obsidian que este proyecto puede usar es **$nb**, ubicada en ``04-Recursos/01-Vault Obsidian/$nb/`` (dentro de la carpeta del proyecto).`r`n" +
+          "**SABIO** (*Sistema de Archivos, Bovedas e Indices Organizados*) es el sistema de memoria y conocimiento del proyecto: SIN RAG (gestion de contexto nativa + boveda-wiki estilo Karpathy), federado en 4 Salas (A.Investigacion = la boveda . B.Catalogo . C.Referencia . D.Aprendizaje) unidas por el indice de indices (``04-Recursos/00-INDICE-DE-INDICES.md``).`r`n" +
+          "`r`n## Acceso a la bóveda`r`n" +
+          "- La **unica** boveda que este proyecto puede usar es **$nb**, ubicada en ``04-Recursos/01-Boveda/$nb/`` (dentro de la carpeta del proyecto).`r`n" +
           "- El acceso es **nativo** (sin MCP). **No** accedas a bovedas, datos ni investigaciones de otros proyectos, ni mezcles su informacion con la de este.`r`n"
         [System.IO.File]::AppendAllText($claudeMd, $regla, $utf8)
       }
-      $hechos.Add("+ CLAUDE.md: seccion SABIO + Acceso a Obsidian")
+      $hechos.Add("+ CLAUDE.md: seccion SABIO + Acceso a la bóveda")
     } else { $saltos++ }
   } else {
     $hechos.Add("! CLAUDE.md ausente (este updater NO lo crea; usa Crear-Proyecto.ps1 para bootstrap)")
@@ -210,23 +234,9 @@ foreach ($proy in $objetivos) {
     } else { $saltos++ }
   }
 
-  # f) Perfil agentico: si el proyecto lo declara, propagar el overlay (ADD-ONLY)
-  $perfilTxt = if (Test-Path $claudeMd) { [System.IO.File]::ReadAllText($claudeMd, [System.Text.Encoding]::UTF8) } else { "" }
-  if ($perfilTxt -match 'Perfil Sala D:\*{0,2}\s*\x60agentico\x60') {
-    $overlayAp = Join-Path $plantillaPerfilAgentico "04-Aprendizaje"
-    $destAp    = Join-Path $recursos "04-Aprendizaje"
-    foreach ($item in (Get-ChildItem -Path $overlayAp -Recurse -File)) {
-      $rel = $item.FullName.Substring($overlayAp.Length).TrimStart('\')
-      $destFile = Join-Path $destAp $rel
-      if (-not (Test-Path $destFile)) {
-        if ($Aplicar) {
-          New-Item -ItemType Directory -Force -Path (Split-Path $destFile) | Out-Null
-          Copy-Item -Path $item.FullName -Destination $destFile
-        }
-        $hechos.Add("+ perfil agentico: 04-Aprendizaje\$rel")
-      } else { $saltos++ }
-    }
-  }
+  # f) Sala D unificada: ESQUEMA.md + tools/ + promociones/ son estandar (vienen en _federado, ya cubiertos
+  #    por el bloque federado de arriba y por la convergencia 'h'). El perfil 'agentico' es solo un FLAG en
+  #    el CLAUDE.md del proyecto, no otra estructura: no se superpone nada.
 
   # g) .mcp.json con el MCP sabio-shared (ADD-ONLY; no pisa otros MCP). Solo si se dio -CentroDeMando.
   if ($null -ne $mcpShared) {
@@ -251,6 +261,46 @@ foreach ($proy in $objetivos) {
           $hechos.Add("+ .mcp.json: sabio-shared (sin pisar otros MCP)")
         } else { $saltos++ }
       } catch { $saltos++ }
+    }
+  }
+
+  # h) CONVERGENCIA generacional: re-proyectar artefactos canonicos atrasados (preserva lo local)
+  $convItems = @()
+  foreach ($a in $artefactosFederado) {
+    $convItems += @{ canon = (Join-Path $plantillaFederado $a.rel); dest = (Join-Path $recursos $a.rel); tipo = $a.tipo }
+  }
+  if ($nombreBoveda) {
+    $convItems += @{ canon = (Join-Path $plantillaBoveda "CLAUDE.md"); dest = (Join-Path $vaultPadre (Join-Path $nombreBoveda "CLAUDE.md")); tipo = "mixto" }
+  }
+  foreach ($c in $convItems) {
+    if (-not (Test-Path $c.canon)) { continue }
+    $genCanon = Get-SabioGen $c.canon
+    $genProy  = Get-SabioGen $c.dest
+    $relName  = Split-Path $c.dest -Leaf
+    if ($genProy -eq -1) { continue }                       # ausente: lo cubre el bloque ADD-ONLY de arriba
+    if ($genProy -ge $genCanon) { $saltos++; continue }     # al dia
+    $canonTxt = [System.IO.File]::ReadAllText($c.canon, [System.Text.Encoding]::UTF8)
+    $canonTxt = Convert-Marcadores $canonTxt $nombre $nombreBoveda $fecha
+    if ($c.tipo -eq "puro") {
+      if ($Aplicar) { [System.IO.File]::WriteAllText($c.dest, $canonTxt, $utf8) }
+      $hechos.Add("~ convergido (puro) $relName  [gen $genProy -> $genCanon]")
+    } else {
+      $proyTxt = [System.IO.File]::ReadAllText($c.dest, [System.Text.Encoding]::UTF8)
+      if ($proyTxt -notmatch $reCanon) {
+        $hechos.Add("! $relName gen $genProy SIN marcadores -> requiere migracion inicial (manual); NO se toca")
+        continue
+      }
+      $regionCanon = [regex]::Match($canonTxt, $reCanon).Value
+      $evaluador = [System.Text.RegularExpressions.MatchEvaluator]{ param($mm) $regionCanon }
+      $nuevo = [regex]::Replace($proyTxt, $reCanon, $evaluador)
+      if ($nuevo -match $reSello) {
+        $selloEval = [System.Text.RegularExpressions.MatchEvaluator]{ param($mm) ("<!-- sabio-generacion: " + $genCanon + " -->") }
+        $nuevo = [regex]::Replace($nuevo, $reSello, $selloEval)
+      } else {
+        $nuevo = "<!-- sabio-generacion: $genCanon -->`r`n" + $nuevo
+      }
+      if ($Aplicar) { [System.IO.File]::WriteAllText($c.dest, $nuevo, $utf8) }
+      $hechos.Add("~ convergido (mixto, region canonica) $relName  [gen $genProy -> $genCanon]")
     }
   }
 

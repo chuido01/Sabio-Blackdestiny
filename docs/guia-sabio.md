@@ -56,7 +56,7 @@ Ese es el aislamiento.
 Cada dato es de un tipo, y por eso vive en una Sala concreta. Son como cuatro estanterías con
 etiquetas distintas.
 
-- **Sala A · Investigación** — Lo que estudias e investigas. Es la bóveda Obsidian: notas cortas (una
+- **Sala A · Investigación** — Lo que estudias e investigas. Es la bóveda: notas cortas (una
   idea por nota) enlazadas entre sí. La del Centro es **multi-dominio**: un dominio nuevo se añade como
   una **etiqueta** + un mapa, **nunca** como una bóveda aparte. Etiqueta: `investigacion:<tema>`.
 - **Sala B · Catálogo** — Tus herramientas y activos. Fichas de lo que tienes: qué es, para qué sirve,
@@ -66,13 +66,14 @@ etiquetas distintas.
   país) y `sector:` (la regulación de un rubro). Sube lo que **necesita más de un proyecto**, no "lo
   internacional"; cada proyecto declara su *perfil de aplicabilidad*. Etiqueta: `norma:<marco>:<código>`.
 - **Sala D · Aprendizaje** — Lecciones de lo que pasó, para no repetir errores: "la próxima vez, hazlo
-  así". Se llena de **dos formas**: al **construir** —con `/sabio-aprender` (rápido) o **`/sabio-reflector`** (reflexiona con feedback externo e infiere la causa)— y, en
+  así". Se llena de **dos formas**: al **construir** —con `/sabio-aprender` (rápido) o `/sabio-aprender --reflexivo` (reflexiona con feedback externo e infiere la causa)— y, en
   proyectos con agentes, **automáticamente** cuando un agente ejecuta. Etiqueta: `aprendizaje:<id>`.
 
-> **Dos perfiles, según el proyecto.** Un proyecto de documentación usa el perfil **base** (captura
-> sencilla con `/sabio-aprender`). Un proyecto con agentes usa el perfil **agéntico**, que añade un validador
-> automático y mide la confianza con números. Es la **misma** Sala D; solo cambia **cuánta maquinaria**
-> carga, según lo que el proyecto necesite.
+> **Una sola forma física, un flag de comportamiento.** Todos los proyectos llevan la **misma** Sala D
+> en disco (el superconjunto: `ESQUEMA.md` + un validador en **todos**). El perfil ya no es otra
+> estructura: es un **flag** en el `CLAUDE.md` (`Perfil Sala D: base | agentico`). En **base** el validador
+> está presente pero inerte; en **agéntico** se activa (integridad forzada + confianza numérica). Así la
+> federación nunca se fragmenta.
 
 ---
 
@@ -188,11 +189,11 @@ listos en su buzón, sin copia-pega (tú decides qué sube; el transporte es aut
 ## 9. Dónde vive cada cosa (dentro de un proyecto)
 
 - Índice de índices: `04-Recursos/00-INDICE-DE-INDICES.md`
-- Sala A (bóveda): `04-Recursos/01-Vault Obsidian/<TuBoveda>/`
+- Sala A (bóveda): `04-Recursos/01-Boveda/<TuBoveda>/`
 - Sala B (catálogo): `04-Recursos/02-Catalogo/`
 - Sala C (referencia, global): `04-Recursos/03-Referencia/`
 - Sala D (aprendizaje): `04-Recursos/04-Aprendizaje/`
-- Reglas del esquema del wiki: `04-Recursos/01-Vault Obsidian/<TuBoveda>/CLAUDE.md`
+- Reglas del esquema del wiki: `04-Recursos/01-Boveda/<TuBoveda>/CLAUDE.md`
 
 El motor (el Kit) y el puente al plano global (el MCP `sabio-shared`) viven en el repo: ver `kit/` y
 `mcp/`.

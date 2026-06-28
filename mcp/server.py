@@ -21,7 +21,7 @@ Configuración por variables de entorno (opcionales):
 - `SABIO_GLOBAL_ROOT`  raíz del plano global (tu Centro de Mando Sabio). Si no se da, se deriva de la
   ubicación de este script: <root>/mcp/server.py → parents[1] == <root>.
 - `SABIO_VAULT_NAME`   nombre de la carpeta de la bóveda (Sala A). Si no se da, se autodetecta la
-  única subcarpeta bajo `04-Recursos/01-Vault Obsidian/`.
+  única subcarpeta bajo `04-Recursos/01-Boveda/`.
 """
 
 from __future__ import annotations
@@ -57,7 +57,7 @@ _DEFAULT_ROOT = Path(__file__).resolve().parents[1]
 GLOBAL_ROOT = Path(os.environ.get("SABIO_GLOBAL_ROOT", str(_DEFAULT_ROOT))).resolve()
 
 # Subárboles del plano global que SÍ se exponen (todo lo demás bajo la raíz queda fuera).
-# `04-Recursos` subsume las 4 Salas (A bajo 01-Vault Obsidian/ + B/C/D + índice de índices).
+# `04-Recursos` subsume las 4 Salas (A bajo 01-Boveda/ + B/C/D + índice de índices).
 ALLOWED_SUBTREES = [
     "04-Recursos",
 ]
@@ -71,24 +71,24 @@ INDICE_DE_INDICES = "04-Recursos/00-INDICE-DE-INDICES.md"
 
 def _detect_vault_name() -> str:
     """Nombre de la bóveda (Sala A). Override por env SABIO_VAULT_NAME; si no, autodetecta la
-    única subcarpeta bajo 04-Recursos/01-Vault Obsidian/. Fallback: 'Memory_System'."""
+    única subcarpeta bajo 04-Recursos/01-Boveda/. Fallback: 'Memoria_Global'."""
     env = os.environ.get("SABIO_VAULT_NAME", "").strip()
     if env:
         return env
-    vault_parent = GLOBAL_ROOT / "04-Recursos" / "01-Vault Obsidian"
+    vault_parent = GLOBAL_ROOT / "04-Recursos" / "01-Boveda"
     if vault_parent.is_dir():
         subdirs = [d for d in vault_parent.iterdir() if d.is_dir() and not d.name.startswith(".")]
         if subdirs:
             return subdirs[0].name
-    return "Memory_System"
+    return "Memoria_Global"
 
 
 VAULT_NAME = _detect_vault_name()
 
 # Mapa de salas → (directorio de registros, índice de la sala o None).
 SALAS = {
-    "A": (f"04-Recursos/01-Vault Obsidian/{VAULT_NAME}/wiki",
-          f"04-Recursos/01-Vault Obsidian/{VAULT_NAME}/index.md"),
+    "A": (f"04-Recursos/01-Boveda/{VAULT_NAME}/wiki",
+          f"04-Recursos/01-Boveda/{VAULT_NAME}/index.md"),
     "B": ("04-Recursos/02-Catalogo/fichas", "04-Recursos/02-Catalogo/index.md"),
     "C": ("04-Recursos/03-Referencia/registros", "04-Recursos/03-Referencia/index.md"),
     "D": ("04-Recursos/04-Aprendizaje/registros", None),

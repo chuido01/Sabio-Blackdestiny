@@ -10,7 +10,7 @@
 
 ## Hechos estables (NO inventar)
 - **Arquitectura:** 2 capas, **SIN RAG** (gestión de contexto nativa de Claude Code + una bóveda-wiki
-  en Obsidian estilo Karpathy).
+  estilo Karpathy).
 - **Estructura:** las mismas 5 carpetas que cualquier proyecto. El **plano global** vive en
   `04-Recursos/` (índice de índices + las 4 Salas).
 - **MCP:** `mcp/server.py` expone `04-Recursos/` en **solo-lectura** a los proyectos (`sabio-shared`).

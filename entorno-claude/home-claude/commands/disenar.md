@@ -1,5 +1,5 @@
 ---
-description: Aplica un lineamiento de diseño a una decisión concreta — equilibra KISS/YAGNI/DRY/SOLID/DDD/Clean Arch como una secuencia en el tiempo, con la Regla de Tres como dial y la legibilidad como desempate. Devuelve una recomendación con su porqué. Self-contained.
+description: Aplica el lineamiento de diseño de la flota a una decisión concreta — equilibra KISS/YAGNI/DRY/SOLID/DDD/Clean Arch como una secuencia en el tiempo, con la Regla de Tres como dial y la legibilidad como desempate. Devuelve una recomendación con su porqué. Self-contained.
 argument-hint: [la decisión de diseño en duda | el archivo/código a evaluar]
 model: sonnet
 ---
@@ -38,4 +38,4 @@ Los principios **no se promedian**: se aplican como una **secuencia en el tiempo
 - **Plan diferido (si aplica):** qué señal disparará el siguiente nivel de estructura (p. ej. "extraer a la 3.ª duplicación").
 
 ## Fuentes (respaldo)
-Lineamiento destilado de: Metz (*The Wrong Abstraction*) · Dodds (*AHA Programming*) · Seemann (*Why DRY?*, coste = C×p) · Three Dots Labs (*Is Clean Architecture Overengineering?*) · hidekazu-konishi (*Software Design Principles in Practice*, el checklist) · canon: R. C. Martin (SOLID/Clean Arch), E. Evans (DDD), M. Fowler (Rule of Three, YAGNI). Puedes guardar la razón y la evidencia como nota de respaldo `investigacion:decision-equilibrio-principios-diseno` en tu Sala A.
+Lineamiento destilado de: Metz (*The Wrong Abstraction*) · Dodds (*AHA Programming*) · Seemann (*Why DRY?*, coste = C×p) · Three Dots Labs (*Is Clean Architecture Overengineering?*) · hidekazu-konishi (*Software Design Principles in Practice*, el checklist) · canon: R. C. Martin (SOLID/Clean Arch), E. Evans (DDD), M. Fowler (Rule of Three, YAGNI). Razón y evidencia: nota de respaldo `investigacion:decision-equilibrio-principios-diseno` en la Sala A del Centro.

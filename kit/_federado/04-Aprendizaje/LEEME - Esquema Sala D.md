@@ -1,3 +1,4 @@
+<!-- sabio-generacion: 2 -->
 # Sala D — Aprendizaje operativo (esquema)
 
 > **Para qué existe esta sala:** capturar lo que el sistema **aprende al construirse o al ejecutarse**
@@ -17,35 +18,38 @@
 ## Dos planos (dónde vive)
 
 La **captura es siempre local** (la Sala D del proyecto; nunca cruza a otro — aislamiento Capa 1). Lo
-**transversal** se **promueve** a la Sala D **global** del Centro de Mando, consultable read-only por los
-proyectos vía `sabio-shared` — igual que la Sala C. «Global» es solo el **destino de la promoción**.
+**transversal** se **promueve** a la Sala D **global** del Centro de Mando, consultable read-only por la
+flota vía `sabio-shared` — igual que la Sala C. «Global» es solo el **destino de la promoción**.
 
-## Dos perfiles (cuánta maquinaria)
+## Una sola forma física, un flag de comportamiento
 
-La Sala D tiene **un núcleo común** y **dos perfiles** según la casuística del proyecto. El perfil
-agéntico es el base **+ extensiones**; ambos comparten prefijo, estados, federación y anti-alucinación,
-así que **la federación no se fragmenta**.
+**Todos los proyectos llevan la MISMA estructura en disco** (el superconjunto: `ESQUEMA.md` +
+`tools/validar-aprendizaje.py` están presentes en **todos**). El **perfil ya no es otra forma física**:
+es un **flag de comportamiento** que decide qué se **activa**, no qué archivos existen. Así la federación
+nunca se fragmenta y la Sala D es homogénea en toda la flota.
 
-| Aspecto | **base** (default) | **agentico** |
+| Aspecto | **base** (flag por defecto) | **agentico** (flag activo) |
 |---|---|---|
-| Productores | ① `/sabio-aprender` | ① `/sabio-aprender` **+** ② runtime de agentes |
+| Productores que CORREN | ① `/sabio-aprender` | ① `/sabio-aprender` **+** ② runtime de agentes |
 | Confianza | cualitativa (`baja/media/alta`) | numérica `0.0–1.0` + umbral (0.8) |
 | Promoción | manual (`/sabio-promover`) | gobernada por umbral (ver `ESQUEMA.md`) |
-| Validación | — | `tools/validar-aprendizaje.py` (integridad forzada) |
-| Índice | — (se filtra por `estado:`) | `_index.json` regenerado por el validador |
-| Para | docs, apps, proyectos sin agentes | proyectos con agentes/skills/plugins en bucle |
+| Validador (`tools/`) | presente, **inerte** (se corre a mano si quieres) | activo (integridad forzada + `_index.json`) |
+| Para | docs, apps, proyectos sin agentes | flotas de agentes/skills/plugins |
 
 **Se declara** con una línea en el `CLAUDE.md` del proyecto: `Perfil Sala D: base | agentico` (default
-**base**). El Kit lo despliega: el perfil agéntico añade `ESQUEMA.md` + `tools/validar-aprendizaje.py`.
-**Sube a agéntico** cuando el proyecto vaya a ejecutar agentes/skills/plugins en bucle.
+**base**). El `ESQUEMA.md` y el validador **vienen en todos los proyectos**; el flag agéntico solo
+**activa** el productor-runtime + el umbral. **Sube el flag a agéntico** cuando el proyecto vaya a
+ejecutar agentes/skills/plugins en bucle.
 
 ## Estructura
 
 ```
 04-Aprendizaje/
-├── LEEME - Esquema Sala D.md   (este archivo)
-├── registros/                  (append-only: un .md por registro; solo avanza `estado:`)
-└── [solo perfil agéntico] ESQUEMA.md · tools/validar-aprendizaje.py · _index.json
+├── LEEME - Esquema Sala D.md     (este archivo)
+├── ESQUEMA.md                    (formato extendido del registro; estándar en TODOS)
+├── tools/validar-aprendizaje.py  (validador de integridad; inerte salvo flag agéntico)
+├── promociones/                  (buzón de salida hacia el plano global)
+└── registros/                    (append-only: un .md por registro; solo avanza `estado:`)
 ```
 
 ## El núcleo (campos comunes a ambos perfiles)
@@ -68,9 +72,9 @@ promovido_a: ""               # ID destino si se gradúa
 Qué se intentó, qué pasó y por qué vale como aprendizaje. Hechos, no opiniones.
 ```
 
-> **Perfil agéntico:** añade campos extendidos (`resultado`, `reclama_novedad`, campos de
-> revisión/promoción, `sintetico`) y usa confianza numérica. Su especificación completa, con la máquina
-> de gobernanza por umbral, vive en **`ESQUEMA.md`** (presente solo en proyectos agénticos).
+> **Campos extendidos (flag agéntico):** `resultado`, `reclama_novedad`, campos de revisión/promoción,
+> `sintetico`, y confianza numérica. La especificación completa (con la gobernanza por umbral) vive en
+> **`ESQUEMA.md`**, que está **en todos los proyectos**; sus campos se llenan cuando el flag agéntico está activo.
 
 ## Máquina de estados (solo hacia adelante; append-only)
 

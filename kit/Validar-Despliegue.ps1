@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Doble-check / TEST de un despliegue SABIO. Verifica que Crear-Proyecto.ps1 escribio TODOS los
   artefactos esenciales y, si el proyecto esta conectado al plano global, que el canal
@@ -13,7 +13,7 @@
   Comprueba:
    1) ESTRUCTURA: las 5 carpetas, git, .gitignore, CLAUDE.md, LEEME, la boveda Sala A completa y el
       cerebro federado (indice de indices + Salas B/C/D con sus LEEME).
-   2) AISLAMIENTO: el CLAUDE.md conserva "Acceso a Obsidian" y "Trabaja SOLO con el contexto de ESTE
+   2) AISLAMIENTO: el CLAUDE.md conserva "Acceso a la bóveda" y "Trabaja SOLO con el contexto de ESTE
       proyecto" (el Kit nunca debe dejar el proyecto con menos aislamiento).
    3) PLANO GLOBAL (opcional): si el .mcp.json declara sabio-shared, arranca el python que ese
       .mcp.json apunta, importa el server.py del Centro de Mando y confirma que LEE el indice de
@@ -78,8 +78,8 @@ Check-Existe ".gitignore"        (Join-Path $Proyecto ".gitignore")
 Check-Existe "CLAUDE.md"         (Join-Path $Proyecto "CLAUDE.md")
 Check-Existe "00 - LEEME.md"     (Join-Path $Proyecto "00-Documentacion\00 - LEEME.md")
 
-# --- Boveda Sala A: localizar la unica carpeta bajo 04-Recursos\01-Vault Obsidian\
-$vaultPadre = Join-Path $Proyecto "04-Recursos\01-Vault Obsidian"
+# --- Boveda Sala A: localizar la unica carpeta bajo 04-Recursos\01-Boveda\
+$vaultPadre = Join-Path $Proyecto "04-Recursos\01-Boveda"
 $boveda = $null
 if (Test-Path $vaultPadre) {
   $boveda = Get-ChildItem -Path $vaultPadre -Directory -ErrorAction SilentlyContinue | Select-Object -First 1
@@ -112,8 +112,8 @@ Check-Existe "  Sala D: LEEME - Esquema"         (Join-Path $recursos "04-Aprend
 $claudeMd = Join-Path $Proyecto "CLAUDE.md"
 if (Test-Path $claudeMd) {
   $txtClaude = [System.IO.File]::ReadAllText($claudeMd, [System.Text.Encoding]::UTF8)
-  if ($txtClaude -match "Acceso a Obsidian") { Add-Check "aislamiento: regla 'Acceso a Obsidian'" "PASS" }
-  else { Add-Check "aislamiento: regla 'Acceso a Obsidian'" "FAIL" "no aparece en CLAUDE.md" }
+  if ($txtClaude -match "Acceso a la bóveda") { Add-Check "aislamiento: regla 'Acceso a la bóveda'" "PASS" }
+  else { Add-Check "aislamiento: regla 'Acceso a la bóveda'" "FAIL" "no aparece en CLAUDE.md" }
   if ($txtClaude -match "SOLO con el contexto") { Add-Check "aislamiento: 'Trabaja SOLO con el contexto'" "PASS" }
   else { Add-Check "aislamiento: 'Trabaja SOLO con el contexto'" "FAIL" "no aparece en CLAUDE.md" }
 } else {

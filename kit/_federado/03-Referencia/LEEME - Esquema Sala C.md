@@ -1,3 +1,5 @@
+<!-- sabio-generacion: 1 -->
+<!-- sabio:canonico:inicio — NO edites entre estos marcadores: la convergencia del Kit re-proyecta el esquema. Tu perfil de aplicabilidad y notas locales van DEBAJO del cierre. -->
 # Sala C — Referencia externa (esquema)
 
 > **Para qué existe esta sala:** guardar los **estándares, normativas, taxonomías o marcos oficiales**
@@ -50,10 +52,20 @@ la interpretación va en la Sala A (investigación) referenciando este ID.
    Sala A que referencia `norma:<marco>:<codigo>`.
 4. **Amoldar sin perder el sentido:** el prefijo puede ser `regla:`, `estandar:`, lo que tu dominio
    pida; lo que define a esta sala es: **externo, oficial, inmutable, ingerido — nunca redactado**.
-5. **Local vs global (cuándo promover) — criterio NO geográfico:** lo **propio de este proyecto** (un
-   corpus computado/derivado, una norma que solo este proyecto usa) se queda **local**; lo **oficial,
-   público, inmutable y no confidencial** que toque a **más de un proyecto** se promueve al **plano
-   global** vía `/sabio-promover`. La legislación de **aplicación general** de tu jurisdicción es
-   transversal, no "local por nacional". Al promover, etiqueta el **`ambito:`** (`universal` ·
-   `jurisdiccion` · `sector`); cada proyecto resuelve lo `universal` + lo que matchea su **perfil de
-   aplicabilidad**. Una sola Sala C global por etiqueta, **nunca una por país**.
+5. **Local vs global (cuándo promover) — criterio NO geográfico:** lo **propio de este proyecto** (corpus
+   computado/derivado, regulación que solo este proyecto usa) se queda **local**; lo **oficial, público,
+   inmutable y no confidencial** que toque a **más de un proyecto** se promueve al **plano global** (Centro
+   de Mando) vía `/sabio-promover`. La legislación de **aplicación general** de tu jurisdicción es transversal,
+   no "local por nacional". Al promover, etiqueta el **`ambito:`** (`universal`/`jurisdiccion`/`sector`); la
+   flota la resuelve por su **perfil de aplicabilidad** (`CLAUDE.md` del proyecto). Una sola Sala C global
+   por etiqueta, **nunca una por país**. Criterio canónico: el `LEEME - Esquema Sala C.md` del Centro (vía
+   `sabio-shared`).
+<!-- sabio:canonico:fin -->
+
+---
+
+## Perfil de aplicabilidad de este proyecto (LOCAL — tuyo)
+
+> Esta sección es **tuya**: la convergencia **no la toca**. Declara aquí qué resuelve este proyecto del
+> plano global de Sala C — `jurisdiccion:` (ISO-3166, p. ej. `CL`) y/o `sector:` (slug) — además de lo
+> `universal`. El esquema canónico de arriba describe la **forma**; esto describe **tu alcance**.

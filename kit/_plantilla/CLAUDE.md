@@ -1,10 +1,12 @@
+<!-- sabio-generacion: 2 -->
+<!-- sabio:canonico:inicio — NO edites entre estos marcadores: la convergencia del Kit re-proyecta el esquema. Las convenciones que emerjan en TU bóveda van DEBAJO del cierre. -->
 # <NombreBoveda> — Esquema del Wiki LLM (Capa 2)
 
 > **Qué es esto:** las reglas maestras (el "córtex frontal") que sigue Claude Code para
 > ingerir fuentes, redactar notas atómicas, enlazarlas y mantener este wiki.
 > Patrón base: **«LLM Wiki» de Andrej Karpathy** (Markdown local, SIN RAG vectorial) +
 > una **capa de tipado ligera** (estilo Infinite Brain).
-> Plataforma: Claude Code + Obsidian · Volumen objetivo: < 2.000 págs.
+> Plataforma: Claude Code · Volumen objetivo: < 2.000 págs.
 
 ---
 
@@ -29,13 +31,6 @@ los dolores operativos del día a día; aquí se construye conocimiento navegabl
 > es una bóveda que no absorbe conocimiento que pertenece a otra sala.
 > *(Salas A–D = tipos de conocimiento; Capa 1/2 = arquitectura del sistema.)*
 
-> **Bóveda multi-dominio (solo en el plano global / hub):** la bóveda del **Centro de Mando** (no la
-> de un proyecto normal) puede ser **transversal y multi-dominio**: aloja investigación de varios
-> dominios promovida desde los proyectos. Un dominio externo se marca con la clave **`dominio: <slug>`**
-> en el frontmatter **+ una nota-índice (MOC)** dentro de la **única** bóveda; **nunca** se crea una
-> bóveda nueva por tema (`sabio-shared` expone una sola — otra quedaría invisible para la flota). En la
-> bóveda **local de un proyecto** esto no aplica: es de un solo dominio y la clave `dominio:` se omite.
-
 ---
 
 ## 2. Estructura de directorios
@@ -55,8 +50,32 @@ conocimiento; **jamás** se modifica ni se borra. Es la fuente de verdad verific
 
 > **Acceso (nativo):** estando dentro del proyecto, Claude edita estos `.md` **directamente** con las
 > herramientas de archivo (leer/escribir/buscar/`grep`). **No se usa MCP** — no aporta valor extra
-> aquí. La segmentación la garantizan el **aislamiento del proyecto** y la regla «Acceso a Obsidian»
+> aquí. La segmentación la garantizan el **aislamiento del proyecto** y la regla «Acceso a la bóveda»
 > del `CLAUDE.md` del proyecto (la única bóveda permitida es ésta; no mezclar datos de otros proyectos).
+
+---
+
+## 2.1 Navegación a escala — MOC-first (cuando la bóveda crece)
+
+El `index.md` plano («1 línea por nota») es perfecto hasta **~50 notas**. Más allá, **un índice plano no
+escala**: cargarlo entero quema los tokens que el sistema promete ahorrar. La solución es **MOC-first**
+(*Map of Content*), la navegación jerárquica nativa de este patrón:
+
+- **Cada nota declara un `dominio: <slug>`** — no solo las promovidas de otros proyectos, sino **TODO** el
+  contenido, incluido el dominio nativo del proyecto.
+- **Cada dominio tiene una nota-índice (MOC)** que lista y agrupa sus notas con una frase cada una.
+- **El `index.md` se vuelve jerárquico:** un **índice raíz** que lista los **MOCs por dominio** (no las N
+  notas sueltas) → cada MOC indexa las notas de su dominio → la nota. Tres saltos, no una lista de N líneas.
+- **Al consultar:** índice raíz → abre el MOC del dominio relevante → solo entonces la nota. Nunca cargas
+  el wiki entero ni un índice de cientos de líneas.
+- **Al ingerir (amplía §6):** toda nota nueva se asigna a un dominio y se cuelga de su MOC; si el dominio
+  aún no tiene MOC, créalo. Una bóveda pequeña puede vivir con **un** dominio (un MOC); una grande, varios.
+
+> **Por qué:** a volumen objetivo (<2.000 págs) un índice plano sería un archivo de miles de líneas que se
+> carga entero. El MOC-first preserva la **divulgación progresiva** (mapa → resumen → detalle) a cualquier
+> escala. Es el mismo `dominio:` + MOC que el plano global ya usa para dominios externos, ahora **primario
+> para todo el contenido**. *(Migración: una bóveda existente con índice plano se re-organiza a MOC de forma
+> incremental —la más pequeña primero— con el agente `research-curator`; no hace falta de golpe.)*
 
 ---
 
@@ -71,7 +90,7 @@ Si algún día hace falta otro tipo, se documenta aquí antes de usarlo.
 | `hecho` | Dato objetivo, cifra o hallazgo verificado | "−39 % de rendimiento multi-turno" |
 | `decision` | Elección concreta ya tomada y su porqué | "No usar RAG vectorial" |
 | `hipotesis` | Suposición aún por validar | "El volumen crecerá > 2.000 págs" |
-| `pregunta` | Interrogante abierto que requiere investigación | "¿Conviene el MCP de Obsidian?" |
+| `pregunta` | Interrogante abierto que requiere investigación | "¿Conviene adoptar un MCP nuevo?" |
 | `fuente` | Una fuente original de `raw/` (paper, video, repo) | "Paper Lost in the Middle" |
 | `referencia` | Material de apoyo / enlace externo de contexto | Gist, artículo externo |
 | `nota` | Apunte general que no encaja en lo anterior | — |
@@ -123,7 +142,6 @@ autor: IA                   # Humano | IA | Humano+IA
 verificado: false           # true solo si hay fuente primaria citada
 creado: AAAA-MM-DD
 tags: [tag1, tag2]
-dominio: <slug>             # OPCIONAL — solo en la bóveda multi-dominio del hub/plano global; omítela en proyectos
 ---
 ```
 
@@ -200,3 +218,12 @@ Cuando el usuario pida "lint" o "revisa la salud del wiki":
 ## Compact instructions
 Al compactar, conserva: estas reglas de esquema (§3–§9), la ubicación de `raw/`/`wiki/`/`index.md`,
 y qué fuentes ya se ingirieron (según `log.md`).
+<!-- sabio:canonico:fin -->
+
+---
+
+## Convenciones locales de esta bóveda (LOCAL — tuyo, edítalo libremente)
+
+> Esta sección es **tuya**: la convergencia del Kit **no la toca**. Anota aquí las convenciones que
+> emerjan con el uso de **esta** bóveda (dominios propios, vocabulario, MOCs activos) sin tocar el
+> esquema canónico de arriba.

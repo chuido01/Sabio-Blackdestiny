@@ -35,7 +35,7 @@ UMBRAL_CORPUS = 40                       # subcarpeta de una Sala con >= N .md =
 AUTORIA = {"fichas", "registros"}        # subcarpetas de autoría: nunca cuentan como corpus
 SALAS_FED = ("04-Recursos/02-Catalogo", "04-Recursos/03-Referencia", "04-Recursos/04-Aprendizaje")
 PRUNE = {"node_modules", ".git", ".obsidian", ".understand-anything", "03-Backups",
-         "01-Vault Obsidian", ".next", "dist", "build", ".venv", "venv", "out",
+         "01-Boveda", ".next", "dist", "build", ".venv", "venv", "out",
          "coverage", "__pycache__", ".vercel", ".svelte-kit"}
 RX_WIKILINK = re.compile(r"\[\[([^\]]+)\]\]")
 RX_ENV = re.compile(r"(^|/)\.env(\.(local|production|prod|staging|secret))?$", re.IGNORECASE)
@@ -133,13 +133,14 @@ def vault_info(ruta: Path) -> dict:
             if nombre and cuenta >= UMBRAL_CORPUS and nombre not in AUTORIA:
                 federado_corpus += cuenta
 
-    # raíces de vault Obsidian: padre de cada .obsidian (excluyendo backups / node_modules)
+    # raíces de bóveda: cada subcarpeta directa de un 01-Boveda (excluyendo backups / node_modules)
     vault_roots = []
-    for ob in ruta.rglob(".obsidian"):
-        fp = str(ob)
-        if "03-Backups" in ob.parts or "node_modules" in ob.parts:
+    for bv in ruta.rglob("01-Boveda"):
+        if "03-Backups" in bv.parts or "node_modules" in bv.parts:
             continue
-        vault_roots.append(ob.parent)
+        for child in bv.iterdir():
+            if child.is_dir():
+                vault_roots.append(child)
     vault_roots = sorted(set(vault_roots))
 
     if not vault_roots:

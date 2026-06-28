@@ -1,3 +1,4 @@
+<!-- sabio-generacion: 1 -->
 # ESQUEMA — Registro de aprendizaje · perfil agéntico (Sala D)
 
 > Especificación del formato de un registro de la **Sala D** en el **perfil agéntico**. Markdown +
@@ -5,8 +6,8 @@
 > campo plano es una columna). El perfil **base** usa solo el núcleo (ver `LEEME - Esquema Sala D.md`);
 > aquí se documentan las **extensiones** que comprueba `tools/validar-aprendizaje.py`.
 >
-> Generalizado (sin dominio), apto para cualquier proyecto con agentes en bucle, y unificado a la
-> nomenclatura «Sala».
+> Derivado del sistema pionero de **05-Agentic Cybersecurity**, generalizado (sin dominio) y unificado a
+> la nomenclatura «Sala».
 
 ## Identidad y nombre de archivo
 

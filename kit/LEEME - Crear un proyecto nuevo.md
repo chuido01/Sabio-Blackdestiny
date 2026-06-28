@@ -1,7 +1,7 @@
 # Kit de Proyecto Nuevo — Capa 1 + Capa 2 en un solo paso
 
 > Este kit crea un **proyecto completo** con el estándar SABIO: estructura de carpetas,
-> repositorio git aislado (Capa 1), `CLAUDE.md` con sus reglas, y la **bóveda Obsidian de
+> repositorio git aislado (Capa 1), `CLAUDE.md` con sus reglas, y la **bóveda de
 > Capa 2** (el wiki LLM / segundo cerebro) ya instalada dentro de `04-Recursos/`.
 > **Un solo paso lo hace todo** — ya no hay pasos manuales que se puedan olvidar.
 
@@ -17,12 +17,12 @@
 ├── 03-Backups/            Respaldos fechados (DDMMAAAA).
 ├── 04-Recursos/           El CEREBRO FEDERADO del proyecto (4 salas de conocimiento):
 │   ├── 00-INDICE-DE-INDICES.md   ← el espinazo: qué prefijo de ID vive en qué sala
-│   ├── 01-Vault Obsidian/
+│   ├── 01-Boveda/
 │   │   └── <NombreBoveda>/   ← Sala A · Investigación (el wiki de notas atómicas)
 │   ├── 02-Catalogo/          ← Sala B · Catálogo (fichas de activos)
 │   ├── 03-Referencia/        ← Sala C · Referencia externa (estándares oficiales)
 │   └── 04-Aprendizaje/       ← Sala D · Aprendizaje operativo
-├── CLAUDE.md              La ficha del proyecto (árbol + regla de Obsidian + reglas federadas).
+├── CLAUDE.md              La ficha del proyecto (árbol + regla de la bóveda + reglas federadas).
 └── .gitignore
 ```
 
@@ -69,11 +69,11 @@ canónicos del Kit (no los reinventes). Haz EXACTAMENTE esto:
 3) Crea .gitignore con: node_modules/, .env, .env.*, dist/, build/, .claude/, .understand-anything/
 4) COPIA kit/_proyecto/CLAUDE.md a la raíz como CLAUDE.md y sustituye <NombreProyecto>,
    <NombreBoveda> y <PerfilSalaD>; pregúntame los <RELLENAR>.
-5) Crea 04-Recursos/01-Vault Obsidian/<NombreBoveda>/ y COPIA dentro TODO kit/_plantilla/
+5) Crea 04-Recursos/01-Boveda/<NombreBoveda>/ y COPIA dentro TODO kit/_plantilla/
    (sustituye <NombreBoveda> y <fecha>).
 6) COPIA a 04-Recursos/ el contenido de kit/_federado/ (índice de índices + Salas B/C/D),
    sustituyendo <NombreProyecto>, <NombreBoveda> y <fecha>.
-7) Si el perfil es agentico, superpón kit/_perfiles/agentico/ sobre 04-Aprendizaje/.
+7) La Sala D es una sola forma fisica: ESQUEMA.md + tools/ + promociones/ ya vienen en kit/_federado/04-Aprendizaje/ (no hay overlay aparte). El perfil 'agentico' es solo un flag en el CLAUDE.md del proyecto.
 8) Si tengo un Centro de Mando Sabio, crea .mcp.json con el MCP sabio-shared apuntando a
    <RUTA_CENTRO_DE_MANDO>/mcp/server.py y SABIO_GLOBAL_ROOT=<RUTA_CENTRO_DE_MANDO>.
 
@@ -87,9 +87,9 @@ Cuando termines, muéstrame el árbol creado y confírmame que el repo quedó ai
 ## 📚 Después de crear el proyecto
 
 1. **Acceso nativo a la bóveda local:** no hay nada que conectar (sin MCP). Claude edita los `.md`
-   directamente; la segmentación la dan el aislamiento del proyecto + la regla «Acceso a Obsidian».
+   directamente; la segmentación la dan el aislamiento del proyecto + la regla «Acceso a la bóveda».
 2. **Poblar la bóveda:** usa la **`Chuleta de Prompts - Investigacion e Ingesta.md`** (incluida).
-3. **Verificar en Obsidian (opcional):** abre la carpeta de la bóveda como vault para ver el grafo.
+3. **Verificar en un visor de grafo (opcional):** abre la carpeta de la bóveda en cualquier visor de notas `.md` para ver el grafo.
 4. **Validar el despliegue (recomendado):** corre `Validar-Despliegue.ps1 -Proyecto "<ruta>"` — un
    test que confirma que se escribió todo (estructura + aislamiento) y que, si conectaste el plano
    global, el canal **lee de verdad** el índice del Centro de Mando. El comando `/sabio-welcome <ruta>`
@@ -108,6 +108,5 @@ kit/
 ├── Chuleta de Prompts - Investigacion e Ingesta.md
 ├── _proyecto/CLAUDE.md       (plantilla del CLAUDE.md del PROYECTO)
 ├── _plantilla/               (los archivos canónicos de la BÓVEDA — Sala A)
-├── _federado/                (el molde del CEREBRO FEDERADO — Salas B, C, D + espinazo)
-└── _perfiles/agentico/       (Sala D ampliada para proyectos con agentes)
+└── _federado/                (el molde del CEREBRO FEDERADO — Salas B, C, D unificada + espinazo)
 ```

@@ -88,8 +88,8 @@ Usa el Kit ([`kit/`](kit/)) para crear un proyecto completo (Capa 1 + Capa 2):
 
 - **Windows:** `& "kit/Crear-Proyecto.ps1" -ProyectoDestino "<ruta>" -PerfilSalaD base`
 - **macOS/Linux** (o si el usuario prefiere no usar PowerShell): replica los pasos del Kit copiando
-  los moldes `_plantilla/`, `_federado/`, `_proyecto/` (y `_perfiles/agentico/` si el perfil es
-  agéntico), sustituyendo `<NombreProyecto>`, `<NombreBoveda>`, `<fecha>` y `<PerfilSalaD>`.
+  los moldes `_plantilla/`, `_federado/`, `_proyecto/`, sustituyendo `<NombreProyecto>`, `<NombreBoveda>`,
+  `<fecha>` y `<PerfilSalaD>`. (La Sala D es una sola forma: `ESQUEMA.md` + `tools/` ya vienen en `_federado/04-Aprendizaje/`.)
 - Registra el MCP `sabio-shared` en el `.mcp.json` del proyecto, apuntando al `server.py` y al
   Centro de Mando del Paso 3 con **rutas absolutas reales de esta máquina**.
 - **Valida el despliegue:** corre `kit/Validar-Despliegue.ps1 -Proyecto "<ruta>"` (Windows) — o los

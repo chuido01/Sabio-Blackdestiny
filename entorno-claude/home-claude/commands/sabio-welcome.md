@@ -39,7 +39,7 @@ Necesitas saber dos rutas (pregúntalas al usuario si no las tienes en contexto)
 #   Omite -CentroDeMando si el proyecto será solo-local (sin plano global).
 ```
 **macOS/Linux:** replica los pasos del Kit siguiendo `INSTALAR.md` (copiar `_plantilla/`, `_federado/`,
-`_proyecto/`, y `_perfiles/agentico/` si aplica; sustituir `<NombreProyecto>`, `<NombreBoveda>`,
+`_proyecto/`; sustituir `<NombreProyecto>`, `<NombreBoveda>`,
 `<fecha>`, `<PerfilSalaD>`; `git init`; y registrar `sabio-shared` en el `.mcp.json` con rutas reales).
 
 Captura el reporte **HECHO / SIN-CAMBIOS**. El Kit es **idempotente**: re-ejecutarlo solo completa lo que falte.
@@ -55,7 +55,7 @@ declara `sabio-shared`, arranca su `python` importando el `server.py` con `SABIO
 y confirma que **lee** el índice de índices del plano global.
 
 El test comprueba: **estructura efectiva**, **aislamiento preservado** (el `CLAUDE.md` conserva
-"Acceso a Obsidian" y "Trabaja SOLO con el contexto") y, si hay plano global, el **canal de lectura**
+"Acceso a la bóveda" y "Trabaja SOLO con el contexto") y, si hay plano global, el **canal de lectura**
 (read-only) hacia tu Centro de Mando. Un proyecto **solo-local** es válido: ahí el canal es WARN, no FAIL.
 
 **Lee el `exit code`** (0 = todos los checks críticos en PASS). Si hay **FAIL**, reporta el estado como

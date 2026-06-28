@@ -91,8 +91,8 @@ def ids_en_carpeta(carpeta):
 
 
 def carpeta_boveda():
-    """La Sala A vive en 01-Vault Obsidian/<boveda>/wiki (la boveda tiene nombre variable)."""
-    vault = os.path.join(RECURSOS, "01-Vault Obsidian")
+    """La Sala A vive en 01-Boveda/<boveda>/wiki (la boveda tiene nombre variable)."""
+    vault = os.path.join(RECURSOS, "01-Boveda")
     if not os.path.isdir(vault):
         return None
     subs = sorted(d for d in os.listdir(vault) if os.path.isdir(os.path.join(vault, d)))

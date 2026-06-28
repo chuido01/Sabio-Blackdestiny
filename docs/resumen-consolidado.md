@@ -66,10 +66,11 @@ Cada dato es de un tipo, y por eso vive en una Sala concreta (como cuatro estant
 | **C · Referencia** | Normas y estándares externos, en el plano global. **Segmentada por ámbito**: `universal` (NIST/ISO/PCI, para todos), `jurisdiccion:` (la ley de un país), `sector:` (un rubro). Sube lo que **necesita más de un proyecto**, no "lo internacional". | `norma:<marco>:<código>` |
 | **D · Aprendizaje** | Lecciones de lo que pasó, para no repetir errores. | `aprendizaje:<id>` |
 
-**Dos perfiles de la Sala D**, según el proyecto:
-- **Base** — captura sencilla, a mano, con el comando `/sabio-aprender`.
-- **Agéntico** — añade un validador automático y mide la confianza con números. Para proyectos con
-  flotas de agentes. Es la **misma** Sala D; solo cambia cuánta maquinaria carga.
+**Dos perfiles de la Sala D** — **una sola forma física, un flag de comportamiento.** Todos los proyectos
+llevan la **misma** Sala D en disco (el superconjunto: `ESQUEMA.md` + un validador en **todos**). El perfil
+es un **flag** en el `CLAUDE.md` (`Perfil Sala D: base | agentico`):
+- **Base** — captura sencilla con `/sabio-aprender`; el validador está presente pero inerte.
+- **Agéntico** — el flag activa el validador (integridad forzada) y la confianza numérica con umbral.
 
 ---
 

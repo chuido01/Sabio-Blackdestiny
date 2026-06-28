@@ -46,4 +46,4 @@ El Kit (`Crear-Proyecto.ps1 -CentroDeMando …`) genera este bloque por ti.
 - `SABIO_GLOBAL_ROOT` — raíz del plano global (tu Centro de Mando Sabio). Si no se da, se deriva de
   la ubicación del `server.py` (`<root>/mcp/server.py` → `<root>`).
 - `SABIO_VAULT_NAME` — nombre de la carpeta de la bóveda (Sala A). Si no se da, se **autodetecta** la
-  única subcarpeta bajo `04-Recursos/01-Vault Obsidian/`.
+  única subcarpeta bajo `04-Recursos/01-Boveda/`.

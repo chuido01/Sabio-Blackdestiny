@@ -15,11 +15,11 @@
 - **Única excepción:** lectura del **plano global** vía el MCP `sabio-shared` (compartido por diseño) — nunca de otro proyecto.
 
 ## Sistema de conocimiento = SABIO
-- **Sin RAG:** gestión de contexto nativa de Claude Code + una bóveda-wiki en Obsidian estilo Karpathy, con el conocimiento **federado en 4 Salas** (A·Investigación · B·Catálogo · C·Referencia · D·Aprendizaje) unidas por el *índice de índices*.
+- **Sin RAG:** gestión de contexto nativa de Claude Code + una bóveda-wiki estilo Karpathy, con el conocimiento **federado en 4 Salas** (A·Investigación · B·Catálogo · C·Referencia · D·Aprendizaje) unidas por el *índice de índices*.
 - **2 planos:** conocimiento **local** por proyecto + un **plano global** (Centro de Mando Sabio) que guarda la referencia canónica transversal (`norma:…`) e investigación compartida, accesible **solo-lectura** vía `sabio-shared`.
 
 ## Captura de aprendizajes (Sala D)
-- Al cerrar un trabajo no trivial, si apareció un *gotcha*, un error ya resuelto o un mejor camino, **ofrece capturarlo** (captura local en la Sala D del proyecto activo): **`/sabio-aprender`** para captura rápida, o **`/sabio-reflector`** cuando haya **feedback externo** que valga analizar (test, ejecución, tu reacción) — infiere la causa antes de guardar. No guardes sin tu OK, no interrumpas por nimiedades, ni conviertas la Sala D en bitácora. La salida es `/sabio-promover`.
+- Al cerrar un trabajo no trivial, si apareció un *gotcha*, un error ya resuelto o un mejor camino, **ofrece capturarlo** (captura local en la Sala D del proyecto activo): **`/sabio-aprender`** para captura rápida, o **`/sabio-aprender --reflexivo`** cuando haya **feedback externo** que valga analizar (test, ejecución, tu reacción) — infiere la causa antes de guardar (absorbió al antiguo `/sabio-reflector`). No guardes sin tu OK, no interrumpas por nimiedades, ni conviertas la Sala D en bitácora. La salida es `/sabio-promover`.
 
 ## Decisiones de diseño — comando `/disenar`
 - Ante una **duda de diseño** (¿abstraer o duplicar?, ¿añadir capas o mantener simple?), invoca **`/disenar`**: secuencia KISS/YAGNI → DRY/SOLID/DDD → Clean Arch, **Regla de Tres** como dial y **legibilidad** como desempate.

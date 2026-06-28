@@ -11,7 +11,7 @@ Centro de Mando Sabio/
 ├── mcp/                 ← el servidor sabio-shared (copia la carpeta mcp/ del repo) + su .venv
 └── 04-Recursos/         ← el PLANO GLOBAL (las 4 Salas), creado con los moldes del Kit
     ├── 00-INDICE-DE-INDICES.md
-    ├── 01-Vault Obsidian/<TuBovedaGlobal>/   ← Sala A · investigación compartida
+    ├── 01-Boveda/<TuBovedaGlobal>/   ← Sala A · investigación compartida
     ├── 02-Catalogo/                          ← Sala B
     ├── 03-Referencia/                        ← Sala C 🌐 (normas/estándares)
     └── 04-Aprendizaje/                       ← Sala D 🌐 (lecciones transversales promovidas)
@@ -27,7 +27,7 @@ Monta mi Centro de Mando Sabio en la ruta <RUTA>. Haz esto:
 2) Copia la carpeta mcp/ del repo a <RUTA>/mcp/ y crea su entorno: python -m venv <RUTA>/mcp/.venv
    y pip install -r requirements.txt dentro de ese venv.
 3) Crea <RUTA>/04-Recursos/ con los moldes del Kit: copia kit/_federado/ (índice de índices + Salas
-   B/C/D) y crea una bóveda global en 04-Recursos/01-Vault Obsidian/<TuBovedaGlobal>/ con kit/_plantilla/.
+   B/C/D) y crea una bóveda global en 04-Recursos/01-Boveda/<TuBovedaGlobal>/ con kit/_plantilla/.
    Sustituye <NombreProyecto> por "Centro de Mando Sabio", <NombreBoveda> y <fecha>.
 4) Confírmame el árbol creado y que el MCP arranca (python <RUTA>/mcp/server.py debe loguear la raíz).
 ```

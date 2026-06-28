@@ -1,3 +1,4 @@
+<!-- sabio-generacion: 1 -->
 # Sala B — Catálogo operativo (esquema)
 
 > **Para qué existe esta sala:** guardar el "**qué hace / qué tiene** el sistema": sus capacidades,

@@ -105,8 +105,7 @@ sabio-blackdestiny/
 │   ├── Chuleta de Prompts - Investigacion e Ingesta.md   # prompts para poblar la bóveda
 │   ├── _proyecto/CLAUDE.md           #   molde del CLAUDE.md del proyecto (árbol + reglas + federado)
 │   ├── _plantilla/                   #   molde de la BÓVEDA (Sala A): CLAUDE.md, index.md, log.md, templates/, raw/, wiki/
-│   ├── _federado/                    #   molde del CEREBRO FEDERADO: índice de índices + Salas B/C/D con sus LEEME
-│   └── _perfiles/agentico/           #   overlay opcional: Sala D agéntica (ESQUEMA + validador + ejemplo)
+│   └── _federado/                    #   molde del CEREBRO FEDERADO: índice + Salas B/C/D + Sala D unificada (ESQUEMA + validador, estándar en todos)
 │
 ├── centro-de-mando-sabio/            # 🏛 molde del hub / plano global (móntalo una vez)
 │   ├── CLAUDE.md                     #   el rol del hub
